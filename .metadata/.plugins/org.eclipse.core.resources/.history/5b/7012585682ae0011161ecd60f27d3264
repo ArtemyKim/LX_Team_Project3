@@ -1,0 +1,149 @@
+package lx.edu.subwayproject.service;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lx.edu.subwayproject.dao.SubwayNoticeDAO;
+import lx.edu.subwayproject.dto.SubwayNoticeDTO;
+
+
+@Service
+public class SubwayNoticeService {
+
+    @Autowired
+    private SubwayNoticeDAO dao;
+
+
+    // 
+    public void saveNotice(String json) throws Exception {
+
+        List<SubwayNoticeDTO> list = parseNotice(json);
+
+        for (SubwayNoticeDTO dto : list) {
+
+            dao.insertNotice(dto);
+
+        }
+    }
+
+    
+    // API로부터 받은 JSON 데이터를 전처리하는 코드.
+    // api로부터 받아온 JSON파일 형식을 전처리해
+    public List<SubwayNoticeDTO> parseNotice(String json)
+            throws Exception {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        JsonNode root =
+            mapper.readTree(json);
+
+        JsonNode items =
+            root
+            .path("response")
+            .path("body")
+            .path("items")
+            .path("item");
+        
+        List<SubwayNoticeDTO> list =
+            new ArrayList<>();
+
+
+        for (JsonNode item : items) {
+
+            SubwayNoticeDTO dto =
+                new SubwayNoticeDTO();
+
+
+            // 알림 제목
+            dto.setNoticeTitle(
+                item.path("noftTtl").asText()
+            );
+
+
+            // 알림 내용
+            dto.setNoticeContent(
+                item.path("noftCn").asText()
+            );
+
+
+            // 알림 구분 코드
+            dto.setNoticeTypeCode(
+                item.path("noftSeCd").asText()
+            );
+
+
+            // 알림 발생 일시
+            String noticeTime =
+                item.path("noftOcrnDt").asText(null);
+
+            if (noticeTime != null && !noticeTime.isEmpty()) {
+
+                dto.setNoticeTime(
+                    LocalDateTime.parse(noticeTime)
+                );
+            }
+
+
+            // 호선명 목록
+            dto.setLineNameList(
+                item.path("lineNmLst").asText()
+            );
+
+
+            // 역구간 코드 목록
+            dto.setStationSectionCodeList(
+                item.path("stnSctnCdLst").asText()
+            );
+
+
+            // 기준일자
+            dto.setReferenceDate(
+                item.path("crtrYmd").asText()
+            );
+
+
+            // 이례상황 시작 일시
+            String startTime =
+                item.path("xcseSitnBgngDt").asText(null);
+
+            if (startTime != null && !startTime.isEmpty()) {
+
+                dto.setAbnormalStartTime(
+                    LocalDateTime.parse(startTime)
+                );
+            }
+
+
+            // 이례상황 종료 일시
+            String endTime =
+                item.path("xcseSitnEndDt").asText(null);
+
+            if (endTime != null && !endTime.isEmpty()) {
+
+                dto.setAbnormalEndTime(
+                    LocalDateTime.parse(endTime)
+                );
+            }
+
+
+            // 무정차 여부
+            dto.setNonstopYn(
+                item.path("nonstopYn").asText()
+            );
+
+
+            list.add(dto);
+        }
+
+
+        return list;
+    }
+
+}
