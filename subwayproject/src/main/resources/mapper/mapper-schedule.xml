@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lx.edu.subwayproject.dao.ScheduleDAO">
+	<!-- 스케쥴 추가 시작 -->
+	<insert id="insertSchedule">
+	
+	    INSERT INTO schedule
+	    (
+	        TRAVEL_DATE,
+	        TRAVEL_TIME,
+	        USER_USER_ID,
+	        STATION_STATION_ID,
+	        STATION_STATION_ID2
+	    )
+	
+	    VALUES
+	    (
+	        #{travelDate},
+	        #{travelTime},
+	        #{userId},
+	        #{departureStation.stationId},
+	        #{arrivalStation.stationId}
+	    )
+
+	</insert>
+	<!-- 스케쥴 추가 끝 -->
+	
+</mapper>

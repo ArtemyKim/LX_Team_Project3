@@ -19,15 +19,14 @@ public class SubwayNoticeService {
 
     @Autowired
     private SubwayNoticeDAO dao;
-
-
-    
     
     // 전처리된 JSON데이터를 DB에 저장하는 코드.
     public void saveNotice(String json) throws Exception {
 
+    	// paseNotice를 이용해 JSON데이터를 전처리하고
         List<SubwayNoticeDTO> list = parseNotice(json);
 
+        // 해당 리스트를 읽으면서 객체 하나마다 DAO의 insertNotice를 이용해 DB에 넣어줌
         for (SubwayNoticeDTO dto : list) {
 
             dao.insertNotice(dto);
@@ -37,7 +36,6 @@ public class SubwayNoticeService {
 
     
     // API로부터 받은 JSON 데이터를 전처리하는 코드.
-    // api로부터 받아온 JSON파일 형식을 전처리해
     public List<SubwayNoticeDTO> parseNotice(String json)
             throws Exception {
 
