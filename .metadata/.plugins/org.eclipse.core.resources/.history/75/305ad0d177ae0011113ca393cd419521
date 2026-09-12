@@ -1,0 +1,30 @@
+package lx.edu.subwayproject.dto;
+
+import java.time.LocalDateTime;
+
+public class SubwayNoticeDTO {
+
+
+    private int noticeId;
+
+    private String noticeTitle;
+
+    private String noticeContent;
+
+    private String noticeTypeCode;
+
+    private LocalDateTime noticeTime;
+
+    private String lineNameList;
+
+    private String stationSectionCodeList;
+
+    private String referenceDate;
+
+    private LocalDateTime abnormalStartTime;
+
+    private LocalDateTime abnormalEndTime;
+
+    private String nonstopYn;
+
+}

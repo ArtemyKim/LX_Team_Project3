@@ -1,0 +1,13 @@
+package lx.edu.subwayproject.dto;
+
+public class StationDTO {
+	
+	private int stationId; // DB에서의 primary key로 쓰임
+    private String stationCode; // 역 코드. 예시) 0329 
+    private String stationName; // 역 이름. 예시) 청라언덕
+    private String stationLine; // 역 호선. 예시) 4호선
+    
+    // 주의할 점으로, 한 역이 여러 호선에 속하는 경우에는(예: 1호선, 4호선에 속하는 경우)
+    // 이름은 같고 코드는 다른 새로운 StationDTO 객체가 만들어져야 할 것
+
+}

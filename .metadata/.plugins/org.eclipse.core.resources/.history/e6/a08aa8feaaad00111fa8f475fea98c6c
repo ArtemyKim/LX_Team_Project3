@@ -1,0 +1,67 @@
+package lx.edu.subwayproject.service;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+
+import lx.edu.subwayproject.dto.SubwayNoticeDTO;
+
+
+@Service
+public class SubwayNoticeService {
+
+
+    public List<SubwayNoticeDTO> parseNotice(String json)
+            throws Exception {
+
+
+        ObjectMapper mapper = new ObjectMapper();
+
+
+        JsonNode root =
+            mapper.readTree(json);
+
+
+        JsonNode items =
+            root
+            .path("response")
+            .path("body")
+            .path("items")
+            .path("item");
+
+
+        List<SubwayNoticeDTO> list =
+            new ArrayList<>();
+
+
+        for(JsonNode item : items) {
+
+
+            SubwayNoticeDTO dto =
+                new SubwayNoticeDTO();
+
+
+            dto.setNoticeLine(
+                item.path("lineNmLst").asText()
+            );
+
+
+            dto.setNoticeTime(
+                item.path("noftOcrnDt").asText()
+            );
+
+
+            list.add(dto);
+        }
+
+
+        return list;
+    }
+
+}

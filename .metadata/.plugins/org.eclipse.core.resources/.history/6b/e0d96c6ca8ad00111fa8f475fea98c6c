@@ -1,0 +1,30 @@
+package lx.edu.subwayproject.controller;
+
+import java.nio.charset.StandardCharsets;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class ApiController {
+
+    @GetMapping("/api/test")
+    public String test() {
+
+        String url =
+        "http://openapi.seoul.go.kr:8088/"
+        + "51567962453330333938434c734e6b/json/getNtceList/1/3/";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        byte[] response =
+        	    restTemplate.getForObject(url, byte[].class);
+
+        	String result =
+        	    new String(response, "EUC-KR");
+
+        	return result;
+
+    }
+}

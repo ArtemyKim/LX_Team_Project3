@@ -1,0 +1,24 @@
+package lx.edu.subwayproject.dto;
+
+public class SubwayNoticeDTO {
+
+
+    private int noticeId;              // DB Primary Key
+
+    private String noticeTitle;        // 알림 제목
+    private String noticeContent;      // 메시지 내용
+    private String noticeTypeCode;     // 알림 구분 코드
+
+    private String noticeOccurrenceTime; // 알림 발생 일시
+
+    private String lineNameList;       // 호선명 목록
+    private String stationSectionCodeList; // 역구간 코드 목록
+
+    private String referenceDate;      // 기준 일자
+
+    private String abnormalStartTime;  // 이례상황 시작 일시
+    private String abnormalEndTime;    // 이례상황 종료 일시
+
+    private String nonstopYn;          // 무정차 여부
+
+}

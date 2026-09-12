@@ -1,0 +1,16 @@
+package lx.edu.subwayproject.dto;
+
+public class ScheduleDTO {
+
+    private int scheduleId; // Primary key용
+    private int userId; // 해당 스케
+    private int departureStationId;
+
+    private int arrivalStationId;
+
+    private LocalDate travelDate;
+
+    private LocalTime travelTime;
+
+    // getter / setter
+}

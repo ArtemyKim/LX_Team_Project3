@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lx.edu.subwayproject.dao.SubwayNoticeDAO">
+	<!--  -->
+	<insert id="insertNotice">
+	
+	    INSERT INTO subway_notice
+	    (
+	        notice_title,
+	        notice_content,
+	        notice_type_code,
+	        notice_time,
+	        line_name_list,
+	        station_section_code_list,
+	        reference_date,
+	        abnormal_start_time,
+	        abnormal_end_time,
+	        nonstop_yn
+	    )
+	
+	    VALUES
+	    (
+	        #{noticeTitle},
+	        #{noticeContent},
+	        #{noticeTypeCode},
+	        #{noticeTime},
+	        #{lineNameList},
+	        #{stationSectionCodeList},
+	        #{referenceDate},
+	        #{abnormalStartTime},
+	        #{abnormalEndTime},
+	        #{nonstopYn}
+	    )
+
+	</insert>
+
+</mapper>

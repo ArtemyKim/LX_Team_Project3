@@ -1,0 +1,5 @@
+package lx.edu.subwayproject.service;
+
+public class SubwayNoticeDAO {
+
+}

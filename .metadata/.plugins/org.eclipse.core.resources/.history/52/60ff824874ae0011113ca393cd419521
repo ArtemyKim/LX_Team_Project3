@@ -1,0 +1,8 @@
+package lx.edu.subwayproject.dto;
+
+public class StationDTO {
+	
+    private int stationCode; // 역  
+    private String stationName;
+
+}

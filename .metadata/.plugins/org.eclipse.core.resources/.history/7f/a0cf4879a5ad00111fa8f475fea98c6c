@@ -1,0 +1,21 @@
+package lx.edu.subwayproject.controller;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ApiController {
+
+    @GetMapping("/api/test")
+    public String test() {
+
+        String url =
+        "http://openapi.seoul.go.kr:8088/"
+        +"내키/json/getNtceList/1/10/";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        String result =
+            restTemplate.getForObject(url, String.class);
+
+        return result;
+    }
+}

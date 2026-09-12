@@ -1,0 +1,5 @@
+package lx.edu;
+
+public class SubwayNoticeDTO {
+
+}

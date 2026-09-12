@@ -1,0 +1,40 @@
+package lx.edu.subwayproject.dto;
+
+public class SubwayNoticeDTO {
+
+    private int noticeId;
+    private String noticeTime;
+    private String noticeLine;
+    private 
+
+
+    public int getNoticeId() {
+        return noticeId;
+    }
+
+
+    public void setNoticeId(int noticeId) {
+        this.noticeId = noticeId;
+    }
+
+
+    public String getNoticeTime() {
+        return noticeTime;
+    }
+
+T
+    public void setNoticeTime(String noticeTime) {
+        this.noticeTime = noticeTime;
+    }
+
+
+    public String getNoticeLine() {
+        return noticeLine;
+    }
+
+
+    public void setNoticeLine(String noticeLine) {
+        this.noticeLine = noticeLine;
+    }
+
+}

@@ -1,0 +1,60 @@
+package lx.edu.subwayproject.controller;
+
+import java.nio.charset.StandardCharsets;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import lx.edu.subwayproject.service.SubwayNoticeService;
+
+
+@RestController
+public class SubwayNoticeController {
+
+
+    @Autowired
+    private SubwayNoticeService service;
+
+    @GetMapping(
+        value="/api/test",
+        produces="application/json;charset=UTF-8"
+    )
+    public String test() throws Exception {
+
+
+        String url =
+        "http://openapi.seoul.go.kr:8088/"
+        +"51567962453330333938434c734e6b/json/getNtceList/1/10/";
+
+
+        RestTemplate restTemplate =
+                new RestTemplate();
+
+
+        byte[] response =
+            restTemplate.getForObject(
+                url,
+                byte[].class
+            );
+
+
+        String result =
+            new String(
+                response,
+                StandardCharsets.UTF_8
+            );
+
+
+        System.out.println(result);
+
+
+        // JSON 파싱 후 DB 저장
+        service.saveNotice(result);
+
+
+        return result;
+
+    }
+}

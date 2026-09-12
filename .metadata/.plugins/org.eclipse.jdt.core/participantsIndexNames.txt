@@ -1,0 +1,7 @@
+INDEX VERSION 1.134
+C:\mylx\subwayproject\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2063596665.index
+\myabweb\src\main\java
+C:\mylx\subwayproject\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\628923754.index
+\subwayproject\src\main\java
+C:\mylx\subwayproject\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\521251673.index
+\myabweb\src\main\java

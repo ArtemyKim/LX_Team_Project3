@@ -1,0 +1,10 @@
+package lx.edu.subwayproject.dto;
+
+public class StationDTO {
+	
+	private int stationId; // DB에서의 primary key로 쓰임
+    private String stationCode; // 역 코드. 예시) 0329 
+    private String stationName; // 역 이름. 예시) 
+    
+
+}

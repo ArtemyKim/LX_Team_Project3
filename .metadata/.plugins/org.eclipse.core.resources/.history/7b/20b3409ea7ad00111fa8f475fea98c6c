@@ -1,0 +1,5 @@
+package lx.edu.subwayproject.controller;
+
+public class RestTemplateConfig {
+
+}

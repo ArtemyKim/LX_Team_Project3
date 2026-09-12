@@ -1,0 +1,32 @@
+package lx.edu.subwayproject.controller;
+
+import java.nio.charset.StandardCharsets;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class ApiController {
+
+    @GetMapping("/api/test")
+    public String test() {
+
+        String url =
+        "http://openapi.seoul.go.kr:8088/"
+        + "51567962453330333938434c734e6b/json/getNtceList/1/10/";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 응답 데이터를 byte 배열로 받기
+        byte[] response = 
+            restTemplate.getForObject(url, byte[].class);
+
+        // UTF-8로 직접 변환
+        String result =
+            new String(response, StandardCharsets.UTF_8);
+
+        return result;
+
+    }
+}

@@ -1,0 +1,29 @@
+package lx.edu.subwayproject.dto;
+
+import java.time.LocalDateTime;
+
+public class SubwayNoticeDTO {
+
+    private int noticeId; // Primary key용
+
+    private String noticeTitle; // 알림 제목
+
+    private String noticeContent; // 알림 내용
+
+    private String noticeTypeCode; // 알림구분코드(현재 미사용)
+
+    private LocalDateTime noticeTime; // 알림 발생 일시
+
+    private String lineNameList; // 호선명목록
+
+    private String stationSectionCodeList; // 역구간코드목록
+
+    private String referenceDate; // 
+
+    private LocalDateTime abnormalStartTime; // 이례상황 시작시각
+
+    private LocalDateTime abnormalEndTime; // 이례상황 종료시각
+
+    private String nonstopYn; // 무정차 여부
+
+}
