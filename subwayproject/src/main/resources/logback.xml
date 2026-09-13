@@ -15,6 +15,8 @@
     <logger name="org.springframework.web" level="trace" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
+    
+    <logger name="lx.edu.subwayproject.dao" level="DEBUG"/>
 
     <root level="error">
         <appender-ref ref="CONSOLE"/>

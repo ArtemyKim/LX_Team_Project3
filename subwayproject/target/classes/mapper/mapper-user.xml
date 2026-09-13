@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lx.edu.subwayproject.dao.UserDAO">
+
+<!-- 아이디 비밀번호 database에 추가 -->
+<insert id="insertUser" parameterType="lx.edu.subwayproject.dto.UserDTO" 
+            useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO USERS (
+            user_name, 
+            password
+        ) VALUES (
+            #{userName}, 
+            #{password}
+        )
+    </insert>
+
+
+</mapper>
+
+
