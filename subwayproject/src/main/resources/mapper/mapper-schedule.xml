@@ -15,9 +15,9 @@
         ) VALUES (
             #{travelDate}, 
             #{travelTime}, 
-            #{userUserId}, 
-            #{departureStationId}, 
-            #{arrivalStationId}
+            #{userId}, 
+            #{departureStation.stationId}, 
+            #{arrivalStation.stationId}
         )
     </insert>
 
