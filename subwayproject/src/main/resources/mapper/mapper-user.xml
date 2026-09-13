@@ -3,18 +3,21 @@
 <mapper namespace="lx.edu.subwayproject.dao.UserDAO">
 
 <!-- 아이디 비밀번호 database에 추가 -->
-<insert id="insertUser" parameterType="lx.edu.subwayproject.dto.UserDTO" 
-            useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO USERS (
-            user_name, 
-            password
-        ) VALUES (
-            #{userName}, 
-            #{password}
-        )
-    </insert>
 
+	<insert id="addUser" parameterType="lx.edu.subwayproject.dto.UserDTO">
+	    insert into users (userName, password)
+	    values (#{userName}, #{password})
+    </insert>
+    
+    
+	<select id="selectUserByUserName" parameterType="String" resultType="lx.edu.subwayproject.dto.UserDTO">
+	    select
+	        userId,
+	        userName,
+	        password
+	    from users
+	    where userName = #{userName}
+	</select>
+	
 
 </mapper>
-
-

@@ -1,5 +1,11 @@
 package lx.edu.subwayproject.dto;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import lombok.Data;
+
+@Data // lombok 사용
 public class StationDTO {
 	
 	private int stationId; // DB에서의 primary key로 쓰임

@@ -12,4 +12,5 @@ public interface SubwayScheduleDAO {
 	
 	void insertSchedule(ScheduleDTO schedule);	
 	List<ScheduleDTO> selectScedulesByUserId(int userId);
+	
 }

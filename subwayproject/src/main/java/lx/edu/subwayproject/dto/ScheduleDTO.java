@@ -3,6 +3,10 @@ package lx.edu.subwayproject.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import lombok.Data;
+
+
+@Data // lombok 사용
 public class ScheduleDTO {
 
     private int scheduleId; // Primary key용

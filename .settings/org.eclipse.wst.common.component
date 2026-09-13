@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="subwayproject">
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/work/Catalina/localhost/subwayproject"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/subwayproject/src/main/java"/>
+        <property name="context-root" value="subwayproject"/>
+        <property name="java-output-path" value="/subwayproject/bin"/>
+    </wb-module>
+</project-modules>
