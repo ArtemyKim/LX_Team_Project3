@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import lx.edu.subwayproject.dto.ScheduleDTO;
 
 @Mapper
-public interface SubwaySchedule {
+public interface SubwayScheduleDAO {
 
 	
 	void insertSchedule(ScheduleDTO schedule);	
