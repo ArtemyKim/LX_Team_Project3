@@ -55,6 +55,9 @@
 	 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 	 	<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
 	 </bean>
+	 
+	 <context:component-scan
+    base-package="lx.edu.subwayproject.dao"/>
 
 
 </beans>

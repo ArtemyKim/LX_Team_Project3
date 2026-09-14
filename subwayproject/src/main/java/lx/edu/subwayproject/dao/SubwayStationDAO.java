@@ -1,12 +1,30 @@
 package lx.edu.subwayproject.dao;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import lx.edu.subwayproject.dto.StationDTO;
 
-@Mapper
-public interface SubwayStationDAO {
-	void insertStation(StationDTO station);
-	
-	StationDTO selectStationById(int StationId);
+@Component
+public class SubwayStationDAO {
+
+    @Autowired
+    private SqlSession sqlSession;
+
+    public void insertStation(StationDTO station) {
+
+        sqlSession.insert(
+            "lx.edu.subwayproject.dao.SubwayStationDAO.insertStation",
+            station
+        );
+    }
+
+    public StationDTO selectStationById(int stationId) {
+
+        return sqlSession.selectOne(
+            "lx.edu.subwayproject.dao.SubwayStationDAO.selectStationById",
+            stationId
+        );
+    }
 }

@@ -2,15 +2,31 @@ package lx.edu.subwayproject.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import lx.edu.subwayproject.dto.ScheduleDTO;
 
-@Mapper
-public interface SubwayScheduleDAO {
+@Component
+public class SubwayScheduleDAO {
 
-	
-	void insertSchedule(ScheduleDTO schedule);	
-	List<ScheduleDTO> selectScedulesByUserId(int userId);
-	
+    @Autowired
+    private SqlSession sqlSession;
+
+    public void insertSchedule(ScheduleDTO schedule) {
+
+        sqlSession.insert(
+            "lx.edu.subwayproject.dao.SubwayScheduleDAO.insertSchedule",
+            schedule
+        );
+    }
+
+    public List<ScheduleDTO> selectScedulesByUserId(int userId) {
+
+        return sqlSession.selectList(
+            "lx.edu.subwayproject.dao.SubwayScheduleDAO.selectScedulesByUserId",
+            userId
+        );
+    }
 }
