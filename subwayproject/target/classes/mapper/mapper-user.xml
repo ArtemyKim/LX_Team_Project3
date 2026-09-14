@@ -4,20 +4,21 @@
 
 <!-- 아이디 비밀번호 database에 추가 -->
 
+	<select id="selectUserByUserName" parameterType="String" resultType="lx.edu.subwayproject.dto.UserDTO">
+	    select
+	        USER_ID,
+   			USER_NAME,
+    		PASSWORD
+	    from users
+	    where USER_NAME = #{userName}
+	</select>
+	
 	<insert id="addUser" parameterType="lx.edu.subwayproject.dto.UserDTO">
-	    insert into users (userName, password)
+	    insert into users (USER_NAME, PASSWORD)
 	    values (#{userName}, #{password})
     </insert>
     
     
-	<select id="selectUserByUserName" parameterType="String" resultType="lx.edu.subwayproject.dto.UserDTO">
-	    select
-	        userId,
-	        userName,
-	        password
-	    from users
-	    where userName = #{userName}
-	</select>
 	
 
 </mapper>

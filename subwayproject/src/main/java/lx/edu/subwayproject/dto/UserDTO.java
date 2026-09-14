@@ -13,6 +13,6 @@ public class UserDTO {
     private int userId; // Primary key용
     private String userName; // 실질적으로 유저가 로그인 시에 사용하는 'ID' 에 입력될 것 
     private String password; // 비밀번호
-    private List<ScheduleDTO> scheduleList; // 사용자의 일정(경로) 목록
+    private List<ScheduleDTO> scheduleList; // 사용자의 일정(경로) 목록 - 현재 미사용
     
 }
