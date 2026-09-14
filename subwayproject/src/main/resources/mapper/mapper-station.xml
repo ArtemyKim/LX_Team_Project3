@@ -32,9 +32,7 @@
 	<select id="selectStationByLineName" resultType="lx.edu.subwayproject.dto.StationDTO">
 		select 
 			station_id,
-			station_name,
-			station_code,
-			line_name
+			station_name
 		from station
 		where line_name = #{lineName}
 	</select>

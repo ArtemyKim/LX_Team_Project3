@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lx.edu.subwayproject.dto.StationDTO;
@@ -26,12 +27,15 @@ public class StationController {
 		return "station";
 	}
 	
+	
+//	“이 반환값을 JSP 이름으로 해석하지 말고, HTTP 응답 데이터로 직접 보내” 
+//	전에는 역 목록을 조회한 뒤 JSP로 이동했고, 지금은 역 목록을 조회한 뒤 JSON 데이터 자체를 브라우저에 반환하게 바꾼 거야.
+	@ResponseBody
 	@RequestMapping("/stationsByLine.do")
-	public String stationsByLine(@RequestParam("lineName") String lineName, HttpServletRequest req) {
+	public List<StationDTO> stationsByLine(@RequestParam("lineName") String lineName) {
 		List<StationDTO> stations = stationService.selectStationByLineName(lineName);
-		req.setAttribute("stations", stations);
 		System.out.println("stationByLine.do 호출됨 : "+stations);
-	return "stationsByLine";
+	return stations;
 	}
 	
 }
