@@ -14,15 +14,35 @@
             #{lineName}
         )
     </insert>
+    
+    <!-- 호선 이름 조회 -->
+	<select id="selectLineNames" resultType="String">
+		select distinct line_name 
+		from station
+	</select>
+	<!-- 호선 이름 조회 끝 -->
 
     <!-- ID로 역 조회 -->
     <select id="selectStationById"
             resultType="lx.edu.subwayproject.dto.StationDTO">
         ...
     </select>
+    
+    <!-- 호선 이름별 역 조회 --> <!-- 최진실 코드 -->
+	<select id="selectStationByLineName" resultType="lx.edu.subwayproject.dto.StationDTO">
+		select 
+			station_id,
+			station_name,
+			station_code,
+			line_name
+		from station
+		where line_name = #{lineName}
+	</select>
 
 
-    <!-- 호선별 역 목록 조회 -->
+	 
+    <!-- 호선별 역 목록 조회 --> <!-- AI 제안, 현재 미사용 -->
+    <!--
     <select id="getStationsByLine"
             parameterType="String"
             resultType="lx.edu.subwayproject.dto.StationDTO">
@@ -38,7 +58,7 @@
         WHERE LINE_NAME = #{lineName}
 
         ORDER BY STATION_ID
-
     </select>
+    -->
 	
 </mapper>

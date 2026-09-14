@@ -19,7 +19,7 @@ public class SubwayStationDAO {
     public void insertStation(StationDTO station) {
 
         sqlSession.insert(
-            "mapper-station.insertStation",
+            "lx.edu.subwayproject.dao.SubwayStationDAO.insertStation",
             station
         );
     }
@@ -29,18 +29,39 @@ public class SubwayStationDAO {
     public StationDTO selectStationById(int stationId) {
 
         return sqlSession.selectOne(
-            "mapper-station.selectStationById",
+            "lx.edu.subwayproject.dao.SubwayStationDAO.selectStationById",
             stationId
         );
     }
 
-
-    // 호선명으로 역 목록 조회
+    /*
+    // 호선명으로 역 목록 조회(일단 미사용)
     public List<StationDTO> getStationsByLine(String lineName) {
 
         return sqlSession.selectList(
-            "mapper-station.getStationsByLine",
+            "lx.edu.subwayproject.dao.SubwayStationDAO.getStationsByLine",
             lineName
         );
     }
+    */
+    
+    // 모든 호선명 조회
+    public List<String> selectLineNames() {
+
+        return sqlSession.selectList(
+            "lx.edu.subwayproject.dao.SubwayStationDAO.selectLineNames"
+        );
+    }
+
+
+    // 특정 호선의 역 목록 조회
+    public List<StationDTO> selectStationByLineName(String lineName) {
+
+        return sqlSession.selectList(
+            "lx.edu.subwayproject.dao.SubwayStationDAO.selectStationByLineName",
+            lineName
+        );
+    }
+    
+
 }
