@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lx.edu.subwayproject.dto.UserDTO;
 import lx.edu.subwayproject.service.LoginService;
@@ -23,13 +24,14 @@ public class LoginController {
 	
 	//로그인 버튼 눌렀을 때 처리하는 메서드
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(UserDTO user, HttpSession session) {
+	public String login(UserDTO user, HttpSession session, HttpServletRequest req) {
 		UserDTO loginUser = loginservice.login(user);
 		
 		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
-			return "redirect:/main.do";
+			return "redirect:/schedule_status.do";
 		}
-		return "redirect:/login.do";
+		req.setAttribute("loginError", true);
+		return "login";
 	}	
 }

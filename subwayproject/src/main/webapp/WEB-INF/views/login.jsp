@@ -46,11 +46,11 @@
             <form action="login.do" method="post" id="loginForm">
                 <div class="input-group">
                     <label>아이디</label>
-                    <input type="text" name="userId" id="userId" placeholder="아이디를 입력해주세요">
+                    <input type="text" name="userName" id="userName" placeholder="아이디를 입력해주세요">
                 </div>
                 <div class="input-group">
                     <label>비밀번호</label>
-                    <input type="password" name="userPassword" id="userPassword" placeholder="비밀번호를 입력해주세요">
+                    <input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
                 </div>
                 <button type="submit" class="btn-login">로그인 하기</button>
             </form>
@@ -59,22 +59,26 @@
 
     <script>
         $('#loginForm').submit(function(e) {
-            let userId = $('#userId').val().trim();
-            let userPassword = $('#userPassword').val().trim();
+            let userName = $('#userName').val().trim();
+            let password = $('#password').val().trim();
 
-            if (userId === '') {
+            if (userName === '') {
                 alert('아이디를 입력해주세요.');
-                $('#userId').focus();
+                $('#userName').focus();
                 e.preventDefault();
                 return false;
             }
-            if (userPassword === '') {
+            if (password === '') {
                 alert('비밀번호를 입력해주세요.');
-                $('#userPassword').focus();
+                $('#password').focus();
                 e.preventDefault();
                 return false;
             }
         });
+            if (${not empty loginError}) {
+                alert('비밀번호가 틀렸습니다.');
+                $('#password').focus();
+            }
     </script>
 </body>
 </html>
