@@ -17,10 +17,8 @@ public class LoginService {
 		UserDTO existingUser = dao.selectUserByUserName(user.getUserName());
 		
 		if(existingUser == null) {
-			/* DAO에서 주석처리됨
 			dao.addUser(user);
 			existingUser = dao.selectUserByUserName(user.getUserName());
-			*/
 		} 
 	
 		if(existingUser != null) {
