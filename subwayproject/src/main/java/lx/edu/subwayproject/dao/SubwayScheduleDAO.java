@@ -9,8 +9,7 @@ import lx.edu.subwayproject.dto.ScheduleDTO;
 @Mapper
 public interface SubwayScheduleDAO {
 
-	
 	void insertSchedule(ScheduleDTO schedule);	
-	List<ScheduleDTO> selectScedulesByUserId(int userId);
+	List<ScheduleDTO> selectSchedulesByUserId(int userId);
 	
 }

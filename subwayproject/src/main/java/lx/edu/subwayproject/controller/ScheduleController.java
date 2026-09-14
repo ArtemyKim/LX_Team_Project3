@@ -17,7 +17,7 @@ import lx.edu.subwayproject.service.SubwayNoticeService;
 
 
 @RestController
-@RequestMapping("/schedules") // 경로 매핑
+@RequestMapping("/schedule") // 경로 매핑
 public class ScheduleController {
 	
     @Autowired
