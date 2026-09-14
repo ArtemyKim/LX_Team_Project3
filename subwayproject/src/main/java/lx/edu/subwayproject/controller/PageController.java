@@ -13,9 +13,15 @@ public class PageController {
     }
 
     // 스케줄 입력 페이지
-    @GetMapping("/schedule/input")
+    @GetMapping("/schedule/form")
     public String scheduleInputPage() {
-        return "schedule_input"; // schedule_input.jsp로 이동
+        return "schedulerForm"; // schedule_input.jsp로 이동
+    }
+    
+    // 스케줄 입력 페이지(테스트)
+    @GetMapping("/schedule/inputTest")
+    public String inputTest() {
+        return "inputTest"; // schedule_input.jsp로 이동
     }
     
 

@@ -14,6 +14,6 @@
             #{lineName}
         )
     </insert>
-	<!-- 이례상황 추가 끝 -->
+    	
 	
 </mapper>

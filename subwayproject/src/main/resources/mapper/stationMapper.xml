@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lx.edu.subwayproject.dao.SubwayStationDAO">
+	
+    <select
+        id="getStationsByLine"
+        parameterType="String"
+        resultType="lx.edu.subwayproject.dto.StationDTO">
+
+        SELECT
+            STATION_ID AS stationId,
+            STATION_CODE AS stationCode,
+            STATION_NAME AS stationName,
+            LINE_NAME AS lineName
+
+        FROM STATION
+
+        WHERE LINE_NAME = #{lineName}
+
+        ORDER BY STATION_ID
+
+    </select>
+    	
+	
+</mapper>
