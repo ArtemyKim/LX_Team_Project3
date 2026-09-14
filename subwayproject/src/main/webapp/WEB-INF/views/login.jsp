@@ -13,7 +13,7 @@
 	rel="stylesheet">
 <!-- ============ Google Fonts end ============ -->
 
-<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
