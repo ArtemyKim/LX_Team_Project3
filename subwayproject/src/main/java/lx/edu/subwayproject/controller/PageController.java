@@ -24,4 +24,10 @@ public class PageController {
     public String scheduleStatusPage() {
         return "scheduleStatus";
     }
+    
+    // (테스트)스케쥴 추가
+    @GetMapping("/schedule/inputTest")
+    public String scheduleInputPageTest() {
+        return "input_test";
+    }
 }
