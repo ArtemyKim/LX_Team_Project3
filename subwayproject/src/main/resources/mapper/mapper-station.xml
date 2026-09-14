@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lx.edu.subwayproject.dao.SubwayStationDAO">
 	
+	<!-- 이례상황 추가 -->
 	<insert id="insertStation" parameterType="lx.edu.subwayproject.dto.StationDTO" 
             useGeneratedKeys="true" keyProperty="stationId">
         INSERT INTO STATION (
@@ -15,5 +16,25 @@
         )
     </insert>
 	<!-- 이례상황 추가 끝 -->
+	
+	
+	<!-- 호선 이름 조회 -->
+	<select id="selectLineNames" resultType="String">
+		select distinct line_name 
+		from station
+	</select>
+	<!-- 호선 이름 조회 끝 -->
+	
+	
+	<!-- 호선 이름별 역 조회 -->
+	<select id="selectStationByLineName" resultType="lx.edu.subwayproject.dto.StationDTO">
+		select 
+			station_id,
+			station_name
+		from station
+		where line_name = #{lineName}
+	</select>
+		
+	
 	
 </mapper>
