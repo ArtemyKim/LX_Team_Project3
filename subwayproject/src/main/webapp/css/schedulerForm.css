@@ -1,0 +1,118 @@
+  
+   /* ===== 기본 ===== */
+    body {
+        background-color: #ffffff;
+        font-family: 'Pretendard', sans-serif;
+        margin: 0;
+    }
+
+    /* ===== 네비 ===== */
+    .nav {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 500px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 16px;
+        padding: 0;
+        background-color: transparent;
+        list-style: none;
+        z-index: 2;
+    }
+
+    .nav-link {
+        color: #f9b653;
+        font-family: 'Pretendard', sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    /* ===== 지하철 뒷 배경 ===== */
+    .subway-scene {
+        position: relative;
+        height: 90vh;
+        width: auto;
+        max-width: 100%;
+        aspect-ratio: 5692 / 3200;
+        margin: 10px auto 0;
+        background-image: url('../image/background2.png');
+        background-size: cover;
+        background-position: center;
+        container-type: inline-size;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 160px;
+    }
+
+    /* ===== 경로 카드 너비 ===== */
+    .card-wrap {
+        width: 700px;
+    }
+
+    /* ===== 입력 카드 ===== */
+    .card {
+        background-color: #bfe1ee;
+    }
+
+    .card h2 {
+        color: #ffffff;
+        letter-spacing: 0.05em;
+    }
+
+    /* ===== 입력 필드 ===== */
+    .input-group label {
+        color: #1c1d1f;
+    }
+
+    .input-group input {
+        background-color: #ffffff;
+        color: #1c1d1f;
+    }
+
+    /* ===== 역 구간 ===== */
+    .station-block {
+        background-color: #ffffff;
+        color: #1c1d1f;
+    }
+
+    .station-block .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #f4a935;
+        display: inline-block;
+    }
+
+    /* ===== 빈 상태 ===== */
+    .empty-msg {
+        color: #666;
+    }
+
+    /* ===== 버튼 ===== */
+    /* padding, radius, font-weight은 Bootstrap의 .btn 기본값 사용, 색상만 커스텀 */
+    .btn-primary {
+        background-color: #4a4e69;
+        border-color: #4a4e69;
+    }
+
+    .btn-primary:hover {
+        background-color: #3a3d54;
+        border-color: #3a3d54;
+    }
+
+    .btn-secondary {
+        background-color: #ffffff;
+        border-color: #ffffff;
+        color: #4a4e69;
+    }
+
+    .btn-secondary:hover {
+        background-color: #f2f2f2;
+        border-color: #f2f2f2;
+        color: #4a4e69;
+    }
