@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletResponse;
 import lx.edu.subwayproject.dto.ScheduleDTO;
 import lx.edu.subwayproject.dto.UserDTO;
 import lx.edu.subwayproject.service.ScheduleService;
 import lx.edu.subwayproject.service.SubwayNoticeService;
+
+
 
 
 @RestController
@@ -27,7 +30,7 @@ public class ScheduleController {
 
     @PostMapping // 추가하는 기능이므로 Post방식
     public void insertSchedule(
-            @ModelAttribute ScheduleDTO dto, HttpSession session) throws Exception {
+        @ModelAttribute ScheduleDTO dto, HttpSession session ,HttpServletResponse response) throws Exception {
     	
     	UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
     	dto.setUserId(loginUser.getUserId());
@@ -35,10 +38,11 @@ public class ScheduleController {
     	System.out.println("받은 ScheduleDTO = " + dto);
 
         service.insertSchedule(dto);
+        
+
+        response.sendRedirect(
+            "/subwayproject/schedules.do"
+        );
     }
     
-    
-    
-    
-	
 }

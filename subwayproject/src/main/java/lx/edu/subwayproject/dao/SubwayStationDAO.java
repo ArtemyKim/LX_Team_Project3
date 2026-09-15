@@ -63,5 +63,18 @@ public class SubwayStationDAO {
         );
     }
     
+    // 역 코드명으로 
+    public List<StationDTO> selectStationsByCodes(
+            List<String> stationCodes) {
+
+        return sqlSession.selectList(
+            "lx.edu.subwayproject.dao.SubwayStationDAO.selectStationsByCodes",
+            stationCodes
+        );
+    }
+    
+    
+    
+    
 
 }

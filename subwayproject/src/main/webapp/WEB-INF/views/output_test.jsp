@@ -87,6 +87,10 @@
                             <th>출발역</th>
 
                             <th>도착역</th>
+                            
+                            <th>출발 LINE_ORDER_ID</th>
+                            
+							<th>도착 LINE_ORDER_ID</th>
 
                         </tr>
 
@@ -117,6 +121,14 @@
                                 <td>
                                     ${route.arrivalStationName}
                                 </td>
+                                
+                                <td>
+								    ${route.departureLineOrderId}
+								</td>
+								
+								<td>
+								    ${route.arrivalLineOrderId}
+								</td>
 
                             </tr>
 
@@ -132,6 +144,110 @@
 
 
         </c:choose>
+        
+     	<h3>해당 날짜의 이례상황</h3>
+
+		<c:choose>
+		
+		    <c:when test="${empty schedule.notices}">
+		
+		        <p>
+		            해당 날짜의 이례상황이 없습니다.
+		        </p>
+		
+		    </c:when>
+		
+		
+		    <c:otherwise>
+		
+		        <table border="1">
+		
+		            <thead>
+		
+		                <tr>
+		
+		                    <th>번호</th>
+		
+		                    <th>제목</th>
+		
+		                    <th>내용</th>
+		
+		                    <th>발생 시각</th>
+		
+		                    <th>호선</th>
+		
+		                    <th>기준 날짜</th>
+		
+		                </tr>
+		
+		            </thead>
+		
+		
+		            <tbody>
+		
+		                <c:forEach
+		                    var="notice"
+		                    items="${schedule.notices}">
+		
+		                    <tr>
+		
+		                        <td>
+		                            ${notice.noticeId}
+		                        </td>
+		
+		                        <td>
+		                            ${notice.noticeTitle}
+		                        </td>
+		
+		                        <td>
+		                            ${notice.noticeContent}
+		                        </td>
+		
+		                        <td>
+		                            ${notice.noticeTime}
+		                        </td>
+		
+		                        <td>
+		                            ${notice.lineNameList}
+		                        </td>
+		
+		                        <td>
+		                            ${notice.referenceDate}
+		                        </td>
+		
+		                    </tr>
+		
+		                </c:forEach>
+		
+		            </tbody>
+		
+		        </table>
+		
+		    </c:otherwise>
+		
+		</c:choose>
+		
+		<h3>이례상황 판정</h3>
+
+		<c:choose>
+		
+		    <c:when test="${schedule.problem}">
+		
+		        <strong>
+		            문제 있음
+		        </strong>
+		
+		    </c:when>
+		
+		    <c:otherwise>
+		
+		        <strong>
+		            문제 없음
+		        </strong>
+		
+		    </c:otherwise>
+		
+		</c:choose>
 
 
     </div>

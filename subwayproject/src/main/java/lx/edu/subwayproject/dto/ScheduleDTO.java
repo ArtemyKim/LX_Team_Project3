@@ -16,6 +16,17 @@ public class ScheduleDTO {
     private LocalDate travelDate; // 날짜
     private LocalTime travelTime; // 시간(현재는 미사용)
 
-    private List<RouteDTO> routes; //루트 내용
+    
+    // 이 아래로는 DB에 저장되지는 않고 java에서만 사용됩니다..
+    
+    // 스케줄의 경로 목록
+    private List<RouteDTO> routes;
+    // 해당 날짜에 발생한 이례상황 목록
+    private List<SubwayNoticeDTO> notices;
+
+    // 이례상황 영향 여부
+    private boolean problem;
+    
+    
     
 }

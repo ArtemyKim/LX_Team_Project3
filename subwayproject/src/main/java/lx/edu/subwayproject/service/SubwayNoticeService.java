@@ -1,5 +1,6 @@
 package lx.edu.subwayproject.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class SubwayNoticeService {
     
     // 날짜를 기준으로 이례상황 목록 조회
     public List<SubwayNoticeDTO> getNoticeListByDate(
-            String scheduleDate) {
+            LocalDate scheduleDate) {
 
         return dao.getNoticeListByDate(scheduleDate);
     }
