@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import lx.edu.subwayproject.dto.UserDTO;
@@ -70,4 +70,45 @@ public class PageController {
 
         return "output_test";
     }    
+    
+    @GetMapping("/schedule/status/{scheduleId}/notices")
+    public String scheduleNoticePage(
+            @PathVariable("scheduleId") int scheduleId,
+            HttpSession session,
+            Model model) {
+
+        UserDTO loginUser =
+                (UserDTO) session.getAttribute("loginUser");
+
+        if (loginUser == null) {
+            return "redirect:/login";
+        }
+
+        List<ScheduleDTO> scheduleList =
+                service.selectSchedulesByUserId(
+                        loginUser.getUserId()
+                );
+
+        ScheduleDTO targetSchedule = null;
+
+        for (ScheduleDTO schedule : scheduleList) {
+
+            if (schedule.getScheduleId() == scheduleId) {
+
+                targetSchedule = schedule;
+                break;
+            }
+        }
+
+        if (targetSchedule == null) {
+            return "redirect:/schedules.do";
+        }
+
+        model.addAttribute(
+                "schedule",
+                targetSchedule
+        );
+
+        return "notice_test";
+    }
 }

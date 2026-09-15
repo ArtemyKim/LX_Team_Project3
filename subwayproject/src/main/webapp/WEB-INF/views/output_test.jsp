@@ -1,15 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="addrbook_error.jsp" import="lx.edu.subwayproject.*"%>
-<%@ taglib uri="jakarta.tags.core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page language="java"
+    contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib uri="jakarta.tags.core"
+           prefix="c"%>
 
 <!DOCTYPE html>
+
 <html>
 
 <head>
+
 <meta charset="UTF-8">
 
-<title>스케줄 출력</title>
+<title>내 스케줄</title>
+
+<style>
+
+    body {
+        font-family: sans-serif;
+        padding: 30px;
+    }
+
+    .schedule {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .status-area {
+        margin-top: 20px;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .problem {
+        background-color: #f8d7da;
+        color: #842029;
+        cursor: pointer;
+    }
+
+    .problem:hover {
+        background-color: #f1aeb5;
+    }
+
+    .safe {
+        background-color: #d1e7dd;
+        color: #0f5132;
+    }
+
+</style>
+
+</head>
+
 
 <body>
 
@@ -17,22 +80,25 @@
 <h1>내 스케줄</h1>
 
 
-<!-- 스케줄이 하나도 없는 경우 -->
+<!-- 등록된 Schedule이 없는 경우 -->
 <c:if test="${empty scheduleList}">
 
-    <p>등록된 스케줄이 없습니다.</p>
+    <p>
+        등록된 스케줄이 없습니다.
+    </p>
 
 </c:if>
 
 
-<!-- 스케줄 목록 -->
-<c:forEach var="schedule" items="${scheduleList}">
 
-    <hr>
+<!-- Schedule 목록 -->
+<c:forEach var="schedule"
+           items="${scheduleList}">
+
 
     <div class="schedule">
 
-        <!-- 스케줄 기본 정보 -->
+
         <h2>
             ${schedule.scheduleName}
         </h2>
@@ -55,15 +121,11 @@
 
 
 
-        <!-- ======================
-             Route 목록
-             ====================== -->
-
         <h3>이동 경로</h3>
 
 
+        <!-- Route 존재 여부 -->
         <c:choose>
-
 
             <c:when test="${empty schedule.routes}">
 
@@ -76,7 +138,7 @@
 
             <c:otherwise>
 
-                <table border="1">
+                <table>
 
                     <thead>
 
@@ -87,10 +149,6 @@
                             <th>출발역</th>
 
                             <th>도착역</th>
-                            
-                            <th>출발 LINE_ORDER_ID</th>
-                            
-							<th>도착 LINE_ORDER_ID</th>
 
                         </tr>
 
@@ -99,42 +157,26 @@
 
                     <tbody>
 
-
-                        <c:forEach
-                            var="route"
-                            items="${schedule.routes}"
-                            varStatus="status">
-
+                        <c:forEach var="route"
+                                   items="${schedule.routes}">
 
                             <tr>
 
                                 <td>
-                                    ${status.count}
+                                    ${route.routeSeq}
                                 </td>
-
 
                                 <td>
                                     ${route.departureStationName}
                                 </td>
 
-
                                 <td>
                                     ${route.arrivalStationName}
                                 </td>
-                                
-                                <td>
-								    ${route.departureLineOrderId}
-								</td>
-								
-								<td>
-								    ${route.arrivalLineOrderId}
-								</td>
 
                             </tr>
 
-
                         </c:forEach>
-
 
                     </tbody>
 
@@ -142,112 +184,45 @@
 
             </c:otherwise>
 
-
         </c:choose>
-        
-     	<h3>해당 날짜의 이례상황</h3>
 
-		<c:choose>
-		
-		    <c:when test="${empty schedule.notices}">
-		
-		        <p>
-		            해당 날짜의 이례상황이 없습니다.
-		        </p>
-		
-		    </c:when>
-		
-		
-		    <c:otherwise>
-		
-		        <table border="1">
-		
-		            <thead>
-		
-		                <tr>
-		
-		                    <th>번호</th>
-		
-		                    <th>제목</th>
-		
-		                    <th>내용</th>
-		
-		                    <th>발생 시각</th>
-		
-		                    <th>호선</th>
-		
-		                    <th>기준 날짜</th>
-		
-		                </tr>
-		
-		            </thead>
-		
-		
-		            <tbody>
-		
-		                <c:forEach
-		                    var="notice"
-		                    items="${schedule.notices}">
-		
-		                    <tr>
-		
-		                        <td>
-		                            ${notice.noticeId}
-		                        </td>
-		
-		                        <td>
-		                            ${notice.noticeTitle}
-		                        </td>
-		
-		                        <td>
-		                            ${notice.noticeContent}
-		                        </td>
-		
-		                        <td>
-		                            ${notice.noticeTime}
-		                        </td>
-		
-		                        <td>
-		                            ${notice.lineNameList}
-		                        </td>
-		
-		                        <td>
-		                            ${notice.referenceDate}
-		                        </td>
-		
-		                    </tr>
-		
-		                </c:forEach>
-		
-		            </tbody>
-		
-		        </table>
-		
-		    </c:otherwise>
-		
-		</c:choose>
-		
-		<h3>이례상황 판정</h3>
 
-		<c:choose>
-		
-		    <c:when test="${schedule.problem}">
-		
-		        <strong>
-		            문제 있음
-		        </strong>
-		
-		    </c:when>
-		
-		    <c:otherwise>
-		
-		        <strong>
-		            문제 없음
-		        </strong>
-		
-		    </c:otherwise>
-		
-		</c:choose>
+
+        <div class="status-area">
+
+            <strong>
+                이례상황 :
+            </strong>
+
+
+            <!-- 문제 여부 표시 -->
+            <c:choose>
+
+                <c:when test="${schedule.problem}">
+
+                    <a class="status-badge problem"
+                       href="${pageContext.request.contextPath}/schedule/status/${schedule.scheduleId}/notices">
+
+                        문제 있음
+
+                    </a>
+
+                </c:when>
+
+
+                <c:otherwise>
+
+                    <span class="status-badge safe">
+
+                        문제 없음
+
+                    </span>
+
+                </c:otherwise>
+
+            </c:choose>
+
+        </div>
 
 
     </div>
@@ -257,6 +232,5 @@
 
 
 </body>
-
 
 </html>

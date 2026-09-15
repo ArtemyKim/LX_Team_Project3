@@ -70,6 +70,8 @@
 	    WHERE REPLACE(REFERENCE_DATE, '-', '')
 	          =
 	          DATE_FORMAT(#{scheduleDate}, '%Y%m%d')
+	          <!-- 이례상황코드 7번과 8번은 단순 시간표 관련 내용이기 때문에, 지장을 주지 않음 -->
+	          AND NOTICE_TYPE_CODE NOT IN ('7', '8')
 	
 	    ORDER BY NOTICE_TIME
 	

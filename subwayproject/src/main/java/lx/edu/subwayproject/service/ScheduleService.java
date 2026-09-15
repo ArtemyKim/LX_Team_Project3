@@ -1,5 +1,6 @@
 package lx.edu.subwayproject.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -72,18 +73,12 @@ public class ScheduleService {
     // =========================
     public List<ScheduleDTO> selectSchedulesByUserId(int userId) {
 
-        // 사용자의 Schedule 목록 조회
         List<ScheduleDTO> scheduleList =
                 dao.selectSchedulesByUserId(userId);
 
-
         for (ScheduleDTO schedule : scheduleList) {
 
-
-            // =========================
             // Route 조회
-            // =========================
-
             List<RouteDTO> routes =
                     routeDao.selectRoutesByScheduleId(
                             schedule.getScheduleId()
@@ -92,10 +87,7 @@ public class ScheduleService {
             schedule.setRoutes(routes);
 
 
-            // =========================
-            // 해당 날짜 Notice 조회
-            // =========================
-
+            // 날짜에 맞는 Notice 조회
             List<SubwayNoticeDTO> notices =
                     noticeService.getNoticeListByDate(
                             schedule.getTravelDate()
@@ -104,22 +96,19 @@ public class ScheduleService {
             schedule.setNotices(notices);
 
 
-            // =========================
-            // 문제 여부
-            // =========================
-
-            boolean problem = false;
+            // 실제 영향을 주는 Notice만 저장할 리스트
+            List<SubwayNoticeDTO> affectedNotices =
+                    new ArrayList<>();
 
 
             for (SubwayNoticeDTO notice : notices) {
+
+                boolean noticeAffected = false;
 
                 String sectionCodes =
                         notice.getStationSectionCodeList();
 
 
-                // ---------------------------------
-                // 1. 역 구간 정보 없음
-                // ---------------------------------
                 if (sectionCodes == null
                         || sectionCodes.isBlank()) {
 
@@ -127,26 +116,20 @@ public class ScheduleService {
                 }
 
 
-                // ---------------------------------
-                // 2. 전구간
-                // ---------------------------------
+                // 전구간
                 if ("전구간".equals(sectionCodes.trim())) {
 
                     for (RouteDTO route : routes) {
 
                         if (isWholeLineAffected(route, notice)) {
 
-                            problem = true;
+                            noticeAffected = true;
                             break;
                         }
                     }
-
                 }
 
-
-                // ---------------------------------
-                // 3. 특정 역 코드
-                // ---------------------------------
+                // 특정 역
                 else {
 
                     List<String> stationCodes =
@@ -168,23 +151,31 @@ public class ScheduleService {
                                 route,
                                 affectedStations)) {
 
-                            problem = true;
+                            noticeAffected = true;
                             break;
                         }
                     }
                 }
 
 
-                // 이미 문제가 확인됐으면
-                // 다른 Notice를 더 검사할 필요 없음
-                if (problem) {
-                    break;
+                // 이 Notice가 영향을 주는 경우 저장
+                if (noticeAffected) {
+
+                    affectedNotices.add(notice);
                 }
             }
 
 
-            // ScheduleDTO에 최종 결과 저장
-            schedule.setProblem(problem);
+            // Schedule에 실제 영향 Notice 목록 저장
+            schedule.setAffectedNotices(
+                    affectedNotices
+            );
+
+
+            // 하나라도 있으면 문제 있음
+            schedule.setProblem(
+                    !affectedNotices.isEmpty()
+            );
         }
 
 
