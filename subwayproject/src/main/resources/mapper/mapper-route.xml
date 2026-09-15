@@ -29,47 +29,37 @@
          특정 Schedule의 Route 조회
          ========================= -->
     <select id="selectRoutesByScheduleId"
-            parameterType="int"
-            resultType="lx.edu.subwayproject.dto.RouteDTO">
+	        parameterType="int"
+	        resultType="lx.edu.subwayproject.dto.RouteDTO">
+	
+	    SELECT
+	
+	        R.ROUTE_ID AS routeId,
+	        R.ROUTE_SEQ AS routeSeq,
+	        R.SCHEDULE_SCHEDULE_ID AS scheduleId,
+	
+	        R.DEPARTURE_STATION_ID AS departureStationId,
+	        R.ARRIVAL_STATION_ID AS arrivalStationId,
+	
+	        DS.STATION_NAME AS departureStationName,
+	        AST.STATION_NAME AS arrivalStationName,
+	
+	        DS.LINE_ORDER_ID AS departureLineOrderId,
+	        AST.LINE_ORDER_ID AS arrivalLineOrderId
+	
+	    FROM ROUTE R
+	
+	    LEFT JOIN STATION DS
+	        ON R.DEPARTURE_STATION_ID = DS.STATION_ID
+	
+	    LEFT JOIN STATION AST
+	        ON R.ARRIVAL_STATION_ID = AST.STATION_ID
+	
+	    WHERE R.SCHEDULE_SCHEDULE_ID = #{scheduleId}
+	
+	    ORDER BY R.ROUTE_SEQ
 
-        SELECT
-
-            R.ROUTE_ID AS routeId,
-
-            R.ROUTE_SEQ AS routeSeq,
-
-            R.SCHEDULE_SCHEDULE_ID AS scheduleId,
-
-            R.DEPARTURE_STATION_ID AS departureStationId,
-
-            R.ARRIVAL_STATION_ID AS arrivalStationId,
-
-            DS.STATION_NAME AS departureStationName,
-
-            AST.STATION_NAME AS arrivalStationName
-
-
-        FROM ROUTE R
-
-
-        LEFT JOIN STATION DS
-
-            ON R.DEPARTURE_STATION_ID
-             = DS.STATION_ID
-
-
-        LEFT JOIN STATION AST
-
-            ON R.ARRIVAL_STATION_ID
-             = AST.STATION_ID
-
-
-        WHERE R.SCHEDULE_SCHEDULE_ID = #{scheduleId}
-
-
-        ORDER BY R.ROUTE_SEQ
-
-    </select>
+	</select>
     
     
     

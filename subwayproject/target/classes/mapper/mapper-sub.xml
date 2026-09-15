@@ -35,4 +35,46 @@
 	</insert>
 	<!-- 이례상황 추가 끝 -->
 	
+	
+	<!-- 시작 :: 스케쥴에 저장된 날짜로 해당 날짜의 이례상황 불러오기 -->
+	<select id="getNoticeListByDate"
+	        parameterType="java.time.LocalDate"
+	        resultType="lx.edu.subwayproject.dto.SubwayNoticeDTO">
+	
+	    SELECT
+	
+	        NOTICE_ID AS noticeId,
+	
+	        NOTICE_TITLE AS noticeTitle,
+	
+	        NOTICE_CONTENT AS noticeContent,
+	
+	        NOTICE_TYPE_CODE AS noticeTypeCode,
+	
+	        NOTICE_TIME AS noticeTime,
+	
+	        LINE_NAME_LIST AS lineNameList,
+	
+	        STATION_SECTION_CODE_LIST AS stationSectionCodeList,
+	
+	        REFERENCE_DATE AS referenceDate,
+	
+	        ABNORMAL_START_TIME AS abnormalStartTime,
+	
+	        ABNORMAL_END_TIME AS abnormalEndTime,
+	
+	        NONSTOP_YN AS nonstopYn
+	
+	    FROM SUBWAY_NOTICE
+	<!-- 우리가 처음 DB작업할 때 referenceDate를 VARCHAR(50)으로 해놨기 때문에 date로 바꿔야 함 -->
+	    WHERE REPLACE(REFERENCE_DATE, '-', '')
+	          =
+	          DATE_FORMAT(#{scheduleDate}, '%Y%m%d')
+	
+	    ORDER BY NOTICE_TIME
+	
+	</select>
+	<!-- 끝 :: 스케쥴에 저장된 날짜로 해당 날짜의 이례상황 불러오기 -->
+	
+	
 </mapper>

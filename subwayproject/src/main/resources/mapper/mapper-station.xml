@@ -32,31 +32,39 @@
 	<select id="selectStationByLineName" resultType="lx.edu.subwayproject.dto.StationDTO">
 		select 
 			station_id,
-			station_name
+			station_name,
+			line_order_id
 		from station
 		where line_name = #{lineName}
 	</select>
-
-
-	 
-    <!-- 호선별 역 목록 조회 --> <!-- AI 제안, 현재 미사용 -->
-    <!--
-    <select id="getStationsByLine"
-            parameterType="String"
-            resultType="lx.edu.subwayproject.dto.StationDTO">
-
-        SELECT
-            STATION_ID AS stationId,
-            STATION_CODE AS stationCode,
-            STATION_NAME AS stationName,
-            LINE_NAME AS lineName
-
-        FROM STATION
-
-        WHERE LINE_NAME = #{lineName}
-
-        ORDER BY STATION_ID
-    </select>
-    -->
+	
+	
+	<!-- 여러 역 코드를 이용해 역 조회 -->
+	<select id="selectStationsByCodes"
+	        resultType="lx.edu.subwayproject.dto.StationDTO">
+	
+	    SELECT
+	        STATION_ID AS stationId,
+	        STATION_CODE AS stationCode,
+	        STATION_NAME AS stationName,
+	        LINE_NAME AS lineName,
+	        STATION_MANAGER AS stationManager,
+	        LINE_ORDER_ID AS lineOrderId
+	
+	    FROM STATION
+	
+	    WHERE STATION_CODE IN
+	
+	    <foreach collection="list"
+	             item="stationCode"
+	             open="("
+	             separator=","
+	             close=")">
+	
+	        #{stationCode}
+	
+	    </foreach>
+	
+	</select>
 	
 </mapper>

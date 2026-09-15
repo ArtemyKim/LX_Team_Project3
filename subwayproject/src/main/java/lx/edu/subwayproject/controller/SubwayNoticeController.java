@@ -1,6 +1,7 @@
 package lx.edu.subwayproject.controller;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class SubwayNoticeController {
     // 날짜를 기준으로 이례상황 목록 조회, Get방식
     @GetMapping(value="/api/getByDate")
     public List<SubwayNoticeDTO> getNoticeListByDate(
-            @RequestParam String scheduleDate) {
+            @RequestParam LocalDate scheduleDate) {
     		
     	
     	System.out.println(service.getNoticeListByDate(scheduleDate));

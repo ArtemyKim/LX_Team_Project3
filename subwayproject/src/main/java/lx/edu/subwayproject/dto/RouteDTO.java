@@ -12,9 +12,16 @@ public class RouteDTO {
     private int departureStationId; // 출발역의 ID
     private int arrivalStationId; // 도착역의 ID
     
+    
+    // 이 아래는 DB에 추가되지 않습니다..
+    
     // 조회 화면 출력용
     private String departureStationName;
     private String arrivalStationName;
+    
+    // 실제 노선상의 역 순서
+    private int departureLineOrderId;
+    private int arrivalLineOrderId;
     
 
 }

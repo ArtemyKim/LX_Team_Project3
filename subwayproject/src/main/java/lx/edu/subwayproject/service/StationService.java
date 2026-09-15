@@ -23,4 +23,11 @@ public class StationService {
 		List<StationDTO> stations = stationDao.selectStationByLineName(lineName);				
 		return stations;				
 	}		
+	public List<StationDTO> selectStationsByCodes(
+	        List<String> stationCodes) {
+
+	    return stationDao.selectStationsByCodes(
+	            stationCodes
+	    );
+	}
 }

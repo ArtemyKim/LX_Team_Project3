@@ -10,6 +10,7 @@ import lx.edu.subwayproject.dao.SubwayRouteDAO;
 import lx.edu.subwayproject.dao.SubwayScheduleDAO;
 import lx.edu.subwayproject.dto.RouteDTO;
 import lx.edu.subwayproject.dto.ScheduleDTO;
+import lx.edu.subwayproject.dto.SubwayNoticeDTO;
 
 @Service
 public class ScheduleService {
@@ -19,11 +20,12 @@ public class ScheduleService {
 
     @Autowired
     private SubwayRouteDAO routeDao;
+    
+    // 이례상황 조회용
+    @Autowired
+    private SubwayNoticeService noticeService;
 
-
-    // =========================
-    // Schedule 등록
-    // =========================
+    // 새 스케쥴 등록
     public void insertSchedule(ScheduleDTO schedule)
             throws Exception {
 
@@ -66,22 +68,39 @@ public class ScheduleService {
             int userId) {
 
 
-        // Schedule 목록 조회
+    	 // 1. 사용자의 Schedule 목록 조회
         List<ScheduleDTO> scheduleList =
                 dao.selectSchedulesByUserId(userId);
 
 
-        // 각각의 Schedule에 해당하는 Route 조회
+        // 2. 각각의 Schedule 처리
         for (ScheduleDTO schedule : scheduleList) {
 
+
+            // -------------------------
+            // Route 조회
+            // -------------------------
 
             List<RouteDTO> routes =
                     routeDao.selectRoutesByScheduleId(
                             schedule.getScheduleId()
                     );
 
-
             schedule.setRoutes(routes);
+
+
+            // -------------------------
+            // 같은 날짜의 이례상황 조회
+            // -------------------------
+
+            List<SubwayNoticeDTO> notices =
+                    noticeService.getNoticeListByDate(
+                            schedule.getTravelDate()
+                    );
+
+
+            // 조회한 이례상황을 ScheduleDTO에 저장
+            schedule.setNotices(notices);
         }
 
 

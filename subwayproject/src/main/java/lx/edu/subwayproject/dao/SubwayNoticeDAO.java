@@ -1,5 +1,6 @@
 package lx.edu.subwayproject.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,7 +24,11 @@ public class SubwayNoticeDAO {
         );
     }
     
-    public List<SubwayNoticeDTO> getNoticeListByDate(String scheduleDate) {
+    
+    // 날짜에 따라 이례상황 가져오기
+    public List<SubwayNoticeDTO> getNoticeListByDate(
+            LocalDate scheduleDate) {
+
         return sqlSession.selectList(
             "lx.edu.subwayproject.dao.SubwayNoticeDAO.getNoticeListByDate",
             scheduleDate
