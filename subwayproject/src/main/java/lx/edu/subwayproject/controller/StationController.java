@@ -28,8 +28,8 @@ public class StationController {
 	}
 	
 	
-//	“이 반환값을 JSP 이름으로 해석하지 말고, HTTP 응답 데이터로 직접 보내” 
-//	전에는 역 목록을 조회한 뒤 JSP로 이동했고, 지금은 역 목록을 조회한 뒤 JSON 데이터 자체를 브라우저에 반환하게 바꾼 거야.
+//	반환값을 JSP 이름으로 해석하지 않고, HTTP 응답 데이터로 직접 보냄
+//	전에는 역 목록을 조회한 뒤 JSP로 이동했고, 지금은 역 목록을 조회한 뒤 JSON 데이터 자체를 브라우저에 반환하게 바꿈
 	@ResponseBody
 	@RequestMapping("/stationsByLine.do")
 	public List<StationDTO> stationsByLine(@RequestParam("lineName") String lineName) {

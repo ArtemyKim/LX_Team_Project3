@@ -2,6 +2,7 @@ package lx.edu.subwayproject.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import lombok.Data;
 
@@ -15,4 +16,5 @@ public class ScheduleDTO {
     private LocalDate travelDate; // 날짜
     private LocalTime travelTime; // 시간(현재는 미사용)
 
+    private List<RouteDTO> routes; //루트 내용
 }

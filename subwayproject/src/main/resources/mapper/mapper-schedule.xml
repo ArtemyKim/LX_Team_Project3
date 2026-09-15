@@ -6,18 +6,16 @@
     <insert id="insertSchedule" parameterType="lx.edu.subwayproject.dto.ScheduleDTO" 
             useGeneratedKeys="true" keyProperty="scheduleId">
         INSERT INTO SCHEDULE (
+            user_user_id,
+            schedule_name,
             travel_date, 
-            travel_time, 
-            user_user_id, 
-            departure_station_id, 
-            arrival_station_id
+            travel_time
             
         ) VALUES (
+            #{userId},
+            #{scheduleName},
             #{travelDate}, 
-            #{travelTime}, 
-            #{userId}, 
-            #{departureStation.stationId}, 
-            #{arrivalStation.stationId}
+            #{travelTime}
         )
     </insert>
 
@@ -25,9 +23,9 @@
     <select id="selectSchedulesByUserId" parameterType="int" resultType="lx.edu.subwayproject.dto.ScheduleDTO">
         SELECT 
             SCHEDULE_ID AS scheduleId,
+            USER_USER_ID AS userUserId,
             TRAVEL_DATE AS travelDate,
             TRAVEL_TIME AS travelTime,
-            USER_USER_ID AS userUserId,
             DEPARTURE_STATION_ID AS departureStationId,
             ARRIVAL_STATION_ID AS arrivalStationId
             
