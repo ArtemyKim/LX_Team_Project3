@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" errorPage="addrbook_error.jsp" import="lx.edu.subwayproject.*"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <%@ page session="false"%>
+<link rel="stylesheet"
+      href="${pageContext.request.contextPath}/css/schedulerForm.css">
 
 <!DOCTYPE html>
 <html>
@@ -21,35 +23,34 @@
 
 
     /*
-     * 루트 추가
-     */
-    function addRoute() {
+ * 루트 추가
+ */
+function addRoute() {
 
-        const routeContainer =
-            document.getElementById("routeContainer");
+    const routeContainer =
+        document.getElementById("routeContainer");
 
-        const routeDiv =
-            document.createElement("div");
+    const routeDiv =
+        document.createElement("div");
 
-        routeDiv.className = "route-item";
+    routeDiv.className = "route-item";
 
-        const index = routeCount;
+    const index = routeCount;
 
-        routeDiv.innerHTML =
-            '<hr>' +
+    routeDiv.innerHTML =
 
-            '<h3>Route ' + (index + 1) + '</h3>' +
+        '<h3>Route ' + (index + 1) + '</h3>' +
 
-            '호선 : ' +
+        '<div class="form-row">' +
+            '<label>호선</label>' +
 
             '<select ' +
-            'name="routes[' + index + '].lineName" ' +
-            'class="line-select" ' +
-            'data-index="' + index + '" ' +
-            'required>' +
+                'name="routes[' + index + '].lineName" ' +
+                'class="line-select" ' +
+                'data-index="' + index + '" ' +
+                'required>' +
 
                 '<option value="">호선을 선택하세요</option>' +
-
                 '<option value="1호선">1호선</option>' +
                 '<option value="2호선">2호선</option>' +
                 '<option value="3호선">3호선</option>' +
@@ -61,40 +62,41 @@
                 '<option value="9호선">9호선</option>' +
 
             '</select>' +
+        '</div>' +
 
-            '<br><br>' +
 
-            '출발역 : ' +
+        '<div class="form-row">' +
+            '<label>출발역</label>' +
 
             '<select ' +
-            'name="routes[' + index + '].departureStationId" ' +
-            'id="departureStation-' + index + '" ' +
-            'required disabled>' +
+                'name="routes[' + index + '].departureStationId" ' +
+                'id="departureStation-' + index + '" ' +
+                'required disabled>' +
 
                 '<option value="">호선을 먼저 선택하세요</option>' +
 
             '</select>' +
+        '</div>' +
 
-            '<br><br>' +
 
-            '도착역 : ' +
+        '<div class="form-row">' +
+            '<label>도착역</label>' +
 
             '<select ' +
-            'name="routes[' + index + '].arrivalStationId" ' +
-            'id="arrivalStation-' + index + '" ' +
-            'required disabled>' +
+                'name="routes[' + index + '].arrivalStationId" ' +
+                'id="arrivalStation-' + index + '" ' +
+                'required disabled>' +
 
                 '<option value="">호선을 먼저 선택하세요</option>' +
 
             '</select>' +
+        '</div>';
 
-            '<br><br>';
 
+    routeContainer.appendChild(routeDiv);
 
-        routeContainer.appendChild(routeDiv);
-
-        routeCount++;
-    }
+    routeCount++;
+}
 
 
     /*
@@ -235,156 +237,137 @@
 </script>
 
 </head>
-
-
 <body>
 
+<div class="subway-scene">
 
-<h1>스케줄 등록</h1>
+    <div class="card-wrap">
 
+        <form action="${pageContext.request.contextPath}/schedules"
+              method="post">
 
-<form action="${pageContext.request.contextPath}/schedules"
-      method="post">
+            <div class="schedule-card">
 
+                <!-- ===================== -->
+                <!-- 스케줄 정보 -->
+                <!-- ===================== -->
 
-    <!-- ========================== -->
-    <!-- Schedule 정보 -->
-    <!-- ========================== -->
+                <h2>스케줄 등록</h2>
 
-    <h2>스케줄 정보</h2>
+                <div class="form-row">
+                    <label>스케줄 이름</label>
 
+                    <input type="text"
+                           name="scheduleName"
+                           placeholder="스케줄 이름을 입력하세요"
+                           required>
+                </div>
 
-    스케줄 이름 :
+                <div class="form-row">
+                    <label>날짜</label>
 
-    <input type="text"
-           name="scheduleName"
-           required>
-
-    <br><br>
-
-
-    날짜 :
-
-    <input type="date"
-           name="travelDate"
-           required>
-
-
-    <br><br>
-
-
-    <!-- ========================== -->
-    <!-- Route 정보 -->
-    <!-- ========================== -->
-
-    <h2>경로</h2>
+                    <input type="date"
+                           name="travelDate"
+                           required>
+                </div>
 
 
-    <div id="routeContainer">
+                <!-- ===================== -->
+                <!-- 경로 -->
+                <!-- ===================== -->
+
+                <div class="route-header">
+                    <strong>경로</strong>
+                </div>
+
+                <div id="routeContainer">
+
+                    <div class="route-item">
+
+                        <h3>Route 1</h3>
+
+                        <div class="form-row">
+                            <label>호선</label>
+
+                            <select
+                                name="routes[0].lineName"
+                                class="line-select"
+                                data-index="0"
+                                required>
+
+                                <option value="">호선을 선택하세요</option>
+                                <option value="1호선">1호선</option>
+                                <option value="2호선">2호선</option>
+                                <option value="3호선">3호선</option>
+                                <option value="4호선">4호선</option>
+                                <option value="5호선">5호선</option>
+                                <option value="6호선">6호선</option>
+                                <option value="7호선">7호선</option>
+                                <option value="8호선">8호선</option>
+                                <option value="9호선">9호선</option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label>출발역</label>
+
+                            <select
+                                name="routes[0].departureStationId"
+                                id="departureStation-0"
+                                required
+                                disabled>
+
+                                <option value="">
+                                    호선을 먼저 선택하세요
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label>도착역</label>
+
+                            <select
+                                name="routes[0].arrivalStationId"
+                                id="arrivalStation-0"
+                                required
+                                disabled>
+
+                                <option value="">
+                                    호선을 먼저 선택하세요
+                                </option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
 
 
-        <!-- 최초 Route 1개 -->
+                <div class="button-row">
 
-        <div class="route-item">
+                    <button type="button"
+                            class="btn-route"
+                            onclick="addRoute()">
+                        + 루트 추가
+                    </button>
 
+                    <button type="submit"
+                            class="btn-save">
+                        스케줄 저장
+                    </button>
 
-            <h3>Route 1</h3>
+                </div>
 
+            </div>
 
-            호선 :
-
-            <select
-                name="routes[0].lineName"
-                class="line-select"
-                data-index="0"
-                required>
-
-                <option value="">
-                    호선을 선택하세요
-                </option>
-
-                <option value="1호선">1호선</option>
-                <option value="2호선">2호선</option>
-                <option value="3호선">3호선</option>
-                <option value="4호선">4호선</option>
-                <option value="5호선">5호선</option>
-                <option value="6호선">6호선</option>
-                <option value="7호선">7호선</option>
-                <option value="8호선">8호선</option>
-                <option value="9호선">9호선</option>
-
-            </select>
-
-
-            <br><br>
-
-
-            출발역 :
-
-            <select
-                name="routes[0].departureStationId"
-                id="departureStation-0"
-                required
-                disabled>
-
-                <option value="">
-                    호선을 먼저 선택하세요
-                </option>
-
-            </select>
-
-
-            <br><br>
-
-
-            도착역 :
-
-            <select
-                name="routes[0].arrivalStationId"
-                id="arrivalStation-0"
-                required
-                disabled>
-
-                <option value="">
-                    호선을 먼저 선택하세요
-                </option>
-
-            </select>
-
-
-            <br><br>
-
-
-        </div>
-
+        </form>
 
     </div>
 
-
-    <!-- Route 추가 -->
-
-    <button type="button"
-            onclick="addRoute()">
-
-        루트 추가
-
-    </button>
-
-
-    <br><br><br>
-
-
-    <!-- Schedule 저장 -->
-
-    <button type="submit">
-
-        스케줄 저장
-
-    </button>
-
-
-</form>
-
+</div>
 
 </body>
 

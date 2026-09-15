@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lx.edu.subwayproject.dao.CommunityPostDAO">
+
+
+<!--  게시글 최신목록 조회하기  -->
+<select id="selectPostList" resultType="lx.edu.subwayproject.dto.CommunityPostDTO"> 
+		SELECT POST_ID AS postId, 
+		title, content, 
+		USER_NAME AS userName, 
+		USER_USER_ID AS userId, 
+		CREATED_TIME AS createdTime, 
+		LIKE_COUNT AS likeCount FROM COMMUNITY_POST ORDER BY CREATED_TIME DESC 
+</select>
+
+
+<!--  게시글 입력하기  -->
+<insert id="insertPost" parameterType="lx.edu.subwayproject.dto.CommunityPostDTO">
+
+		INSERT INTO COMMUNITY_POST 
+		( TITLE, CONTENT, USER_NAME, USER_USER_ID, CREATED_TIME, LIKE_COUNT )
+<!--  현시각 자동함수  -->
+
+		VALUES ( #{title}, #{content}, #{userName}, #{userId}, now(), 0 )
+</insert>
+
+
+<!--  게시글 수정하기  -->
+<update id="updatePost" parameterType="lx.edu.subwayproject.dto.CommunityPostDTO"> 
+		UPDATE COMMUNITY_POST SET TITLE = #{title}, 
+		CONTENT = #{content} 
+		WHERE POST_ID = #{postId}
+		AND USER_USER_ID = #{userId} 
+</update>
+
+
+<!--  게시글 삭제하기  -->
+<delete id="deletePost" parameterType="lx.edu.subwayproject.dto.CommunityPostDTO"> 
+			DELETE FROM COMMUNITY_POST 
+			WHERE POST_ID = #{postId} 
+			AND USER_USER_ID = #{userId} 
+</delete>
+</mapper>

@@ -1,118 +1,399 @@
-  
-   /* ===== 기본 ===== */
-    body {
-        background-color: #ffffff;
-        font-family: 'Pretendard', sans-serif;
-        margin: 0;
-    }
+/* =========================================================
+   1. 기본
+   ========================================================= */
 
-    /* ===== 네비 ===== */
-    .nav {
-        position: absolute;
-        top: 30px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        width: 500px;
-        display: flex;
-        justify-content: flex-start;
-        gap: 16px;
-        padding: 0;
-        background-color: transparent;
-        list-style: none;
-        z-index: 2;
-    }
+body {
+    margin: 0;
 
-    .nav-link {
-        color: #f9b653;
-        font-family: 'Pretendard', sans-serif;
-        font-size: 20px;
-        font-weight: 700;
-        text-decoration: none;
-    }
+    background-color: #ffffff;
 
-    /* ===== 지하철 뒷 배경 ===== */
-    .subway-scene {
-        position: relative;
-        height: 90vh;
-        width: auto;
-        max-width: 100%;
-        aspect-ratio: 5692 / 3200;
-        margin: 10px auto 0;
-        background-image: url('../image/background2.png');
-        background-size: cover;
-        background-position: center;
-        container-type: inline-size;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        padding-top: 160px;
-    }
+    color: #1c1d1f;
 
-    /* ===== 경로 카드 너비 ===== */
+    font-family: 'Pretendard', sans-serif;
+}
+
+
+/* =========================================================
+   2. 네비게이션
+   ========================================================= */
+
+.nav {
+    position: absolute;
+
+    top: 30px;
+    left: 0;
+    right: 0;
+
+    width: 500px;
+
+    margin: 0 auto;
+    padding: 0;
+
+    display: flex;
+    justify-content: flex-start;
+
+    gap: 16px;
+
+    background-color: transparent;
+
+    list-style: none;
+
+    z-index: 2;
+}
+
+
+.nav-link {
+    color: #f9b653;
+
+    font-family: 'Pretendard', sans-serif;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   3. 지하철 배경
+   ========================================================= */
+.subway-scene {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    background-image: url('../image/background2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding-top: 195px;
+    padding-bottom: 80px;
+
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   4. 카드 전체 영역
+   ========================================================= */
+
+.card-wrap {
+    width: 800px;
+
+    max-width: calc(100% - 40px);
+}
+
+
+/* =========================================================
+   5. 스케줄 등록 메인 카드
+   ========================================================= */
+
+.schedule-card {
+    width: 100%;
+    height: 620px;
+
+    padding: 32px 30px;
+
+    background-color: #bfe1ee;
+
+    border-radius: 14px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   6. 스케줄 등록 제목
+   ========================================================= */
+
+.schedule-card > h2 {
+    margin: 0 0 28px 0 !important;
+
+    color: #1c1d1f;
+
+    font-size: 28px !important;
+    font-weight: 800 !important;
+
+    letter-spacing: 0.02em;
+}
+
+
+/* =========================================================
+   7. 입력 한 줄
+   ========================================================= */
+
+.form-row {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   8. 입력 라벨
+   ========================================================= */
+
+.form-row label {
+    width: 95px;
+
+    flex-shrink: 0;
+
+    color: #1c1d1f;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   9. input / select
+   ========================================================= */
+
+.form-row input,
+.form-row select {
+    flex: 1;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    background-color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    box-sizing: border-box;
+
+    color: #1c1d1f;
+
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+}
+
+
+/* 입력 필드 클릭 */
+
+.form-row input:focus,
+.form-row select:focus {
+    outline: 2px solid #f9b653;
+}
+
+
+/* 비활성화된 역 선택 */
+
+.form-row select:disabled {
+    background-color: #edf3f5;
+
+    color: #999999;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   10. 경로 제목
+   ========================================================= */
+
+.route-header {
+    margin-top: 20px;
+    margin-bottom: 12px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+
+    color: #1c1d1f;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   11. Route 목록
+   Route가 많아지면 여기만 스크롤
+   ========================================================= */
+
+#routeContainer {
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 12px;
+}
+
+
+/* =========================================================
+   12. 개별 Route
+   ========================================================= */
+
+.route-item {
+    margin: 0 0 20px 0;
+
+    padding: 0;
+}
+
+
+.route-item h3 {
+    margin: 0 0 14px 0;
+
+    color: #1c1d1f;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* JS에서 생성되는 hr 숨기기 */
+
+.route-item hr {
+    display: none;
+}
+
+
+/* =========================================================
+   13. Route 스크롤바
+   ========================================================= */
+
+#routeContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+#routeContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(74, 78, 105, 0.35);
+
+    border-radius: 10px;
+}
+
+
+#routeContainer::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+/* =========================================================
+   14. 버튼 영역
+   ========================================================= */
+
+.button-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 16px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   15. 루트 추가 버튼
+   ========================================================= */
+
+.btn-route {
+    padding: 10px 16px;
+
+    background-color: #ffffff;
+
+    color: #4a4e69;
+
+    border: 1px solid #4a4e69;
+    border-radius: 6px;
+
+    font-family: 'Pretendard', sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.btn-route:hover {
+    background-color: #4a4e69;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   16. 스케줄 저장 버튼
+   ========================================================= */
+
+.btn-save {
+    padding: 10px 16px;
+
+    background-color: #4a4e69;
+
+    color: #ffffff;
+
+    border: 1px solid #4a4e69;
+    border-radius: 6px;
+
+    font-family: 'Pretendard', sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.btn-save:hover {
+    background-color: #3a3d54;
+
+    border-color: #3a3d54;
+}
+
+
+/* =========================================================
+   17. 작은 화면 대응
+   ========================================================= */
+
+@media (max-width: 900px) {
+
     .card-wrap {
-        width: 700px;
+        width: calc(100% - 40px);
     }
 
-    /* ===== 입력 카드 ===== */
-    .card {
-        background-color: #bfe1ee;
+    .schedule-card {
+        height: 620px;
+
+        padding: 28px 24px;
     }
 
-    .card h2 {
-        color: #ffffff;
-        letter-spacing: 0.05em;
+    .form-row label {
+        width: 85px;
     }
-
-    /* ===== 입력 필드 ===== */
-    .input-group label {
-        color: #1c1d1f;
-    }
-
-    .input-group input {
-        background-color: #ffffff;
-        color: #1c1d1f;
-    }
-
-    /* ===== 역 구간 ===== */
-    .station-block {
-        background-color: #ffffff;
-        color: #1c1d1f;
-    }
-
-    .station-block .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #f4a935;
-        display: inline-block;
-    }
-
-    /* ===== 빈 상태 ===== */
-    .empty-msg {
-        color: #666;
-    }
-
-    /* ===== 버튼 ===== */
-    /* padding, radius, font-weight은 Bootstrap의 .btn 기본값 사용, 색상만 커스텀 */
-    .btn-primary {
-        background-color: #4a4e69;
-        border-color: #4a4e69;
-    }
-
-    .btn-primary:hover {
-        background-color: #3a3d54;
-        border-color: #3a3d54;
-    }
-
-    .btn-secondary {
-        background-color: #ffffff;
-        border-color: #ffffff;
-        color: #4a4e69;
-    }
-
-    .btn-secondary:hover {
-        background-color: #f2f2f2;
-        border-color: #f2f2f2;
-        color: #4a4e69;
-    }
+}

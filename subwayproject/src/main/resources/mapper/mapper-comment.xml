@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lx.edu.subwayproject.dao.CommunityCommentDAO">
+
+<!--  특정 게시글의 댓글목록 조회하기  -->
+
+<select id="selectCommentListByPostId" parameterType="int" resultType="lx.edu.subwayproject.dto.CommunityCommentDTO"> 
+			SELECT 
+			COMMENT_ID AS commentId, 
+			CONTENT AS content, 
+			CREATED_TIME AS createdTime, 
+			POST_ID AS postId, 
+			USER_NAME AS userName, 
+			USER_USER_ID AS userId 
+			FROM COMMUNITY_COMMENT 
+			WHERE POST_ID = #{postId} 
+</select>
+<!--  댓글 입력하기  -->
+
+<insert id="insertComment" parameterType="lx.edu.subwayproject.dto.CommunityCommentDTO">
+
+			INSERT INTO COMMUNITY_COMMENT 
+			( CONTENT, CREATED_TIME, POST_ID, USER_NAME, USER_USER_ID )
+
+<!--  현시각 자동함수  -->
+
+			VALUES ( #{content}, now(), #{postId}, #{userName}, #{userId} )
+</insert>
+
+<!--  댓글 수정하기  -->
+		<update id="updateComment" parameterType="lx.edu.subwayproject.dto.CommunityCommentDTO"> 
+
+		UPDATE 
+
+		COMMUNITY_COMMENT 
+		SET CONTENT = #{content} 
+		WHERE COMMENT_ID = #{commentId} 
+		AND USER_USER_ID = #{userId} 
+		
+		</update>
+		
+<!--  댓글 삭제하기  -->
+
+<delete id="deleteComment" parameterType="lx.edu.subwayproject.dto.CommunityCommentDTO"> 
+				DELETE FROM COMMUNITY_COMMENT 
+				WHERE COMMENT_ID = #{commentId} 
+				AND USER_USER_ID = #{userId}
+ </delete>
+ 
+ 
+</mapper>
+
+
