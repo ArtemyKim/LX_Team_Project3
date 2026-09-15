@@ -2,37 +2,125 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lx.edu.subwayproject.dao.SubwayScheduleDAO">
 	
-	<!-- 일정(경로) 등록 -->
-    <insert id="insertSchedule" parameterType="lx.edu.subwayproject.dto.ScheduleDTO" 
-            useGeneratedKeys="true" keyProperty="scheduleId">
+    <!-- =========================
+         Schedule + Route 조회 결과
+         ========================= -->
+    <resultMap id="scheduleWithRoutesMap"
+               type="lx.edu.subwayproject.dto.ScheduleDTO">
+
+        <!-- Schedule -->
+        <id property="scheduleId"
+            column="SCHEDULE_ID"/>
+
+        <result property="userId"
+                column="USER_USER_ID"/>
+
+        <result property="scheduleName"
+                column="SCHEDULE_NAME"/>
+
+        <result property="travelDate"
+                column="TRAVEL_DATE"/>
+
+        <result property="travelTime"
+                column="TRAVEL_TIME"/>
+
+
+        <!-- Schedule 안의 Route 리스트 -->
+        <collection property="routes"
+                    ofType="lx.edu.subwayproject.dto.RouteDTO">
+
+            <id property="routeId"
+                column="ROUTE_ID"/>
+
+            <result property="scheduleId"
+                    column="SCHEDULE_SCHEDULE_ID"/>
+
+            <result property="routeSeq"
+                    column="ROUTE_SEQ"/>
+
+            <result property="departureStationId"
+                    column="DEPARTURE_STATION_ID"/>
+
+            <result property="arrivalStationId"
+                    column="ARRIVAL_STATION_ID"/>
+
+            <result property="departureStationName"
+                    column="DEPARTURE_STATION_NAME"/>
+
+            <result property="arrivalStationName"
+                    column="ARRIVAL_STATION_NAME"/>
+
+        </collection>
+
+    </resultMap>
+
+
+    <!-- =========================
+         일정 등록
+         ========================= -->
+    <insert id="insertSchedule"
+            parameterType="lx.edu.subwayproject.dto.ScheduleDTO"
+            useGeneratedKeys="true"
+            keyProperty="scheduleId">
+
         INSERT INTO SCHEDULE (
-            travel_date, 
-            travel_time, 
-            user_user_id, 
-            departure_station_id, 
-            arrival_station_id
-            
-        ) VALUES (
-            #{travelDate}, 
-            #{travelTime}, 
-            #{userId}, 
-            #{departureStation.stationId}, 
-            #{arrivalStation.stationId}
+            USER_USER_ID,
+            SCHEDULE_NAME,
+            TRAVEL_DATE,
+            TRAVEL_TIME
         )
+        VALUES (
+            #{userId},
+            #{scheduleName},
+            #{travelDate},
+            #{travelTime}
+        )
+
     </insert>
 
-    <!-- 특정 유저의 일정 목록 조회 -->
-    <select id="selectSchedulesByUserId" parameterType="int" resultType="lx.edu.subwayproject.dto.ScheduleDTO">
-        SELECT 
-            SCHEDULE_ID AS scheduleId,
-            TRAVEL_DATE AS travelDate,
-            TRAVEL_TIME AS travelTime,
-            USER_USER_ID AS userUserId,
-            DEPARTURE_STATION_ID AS departureStationId,
-            ARRIVAL_STATION_ID AS arrivalStationId
-            
-	        FROM SCHEDULE
-	        WHERE USER_USER_ID = #{userId}
+
+    <!-- =========================
+         특정 유저의 Schedule 조회
+         ========================= -->
+    <select id="selectSchedulesByUserId"
+            parameterType="int"
+            resultMap="scheduleWithRoutesMap">
+
+        SELECT
+
+            S.SCHEDULE_ID,
+            S.USER_USER_ID,
+            S.SCHEDULE_NAME,
+            S.TRAVEL_DATE,
+            S.TRAVEL_TIME,
+
+            R.ROUTE_ID,
+            R.ROUTE_SEQ,
+            R.SCHEDULE_SCHEDULE_ID,
+            R.DEPARTURE_STATION_ID,
+            R.ARRIVAL_STATION_ID,
+
+            DS.STATION_NAME AS DEPARTURE_STATION_NAME,
+            AST.STATION_NAME AS ARRIVAL_STATION_NAME
+
+        FROM SCHEDULE S
+
+        LEFT JOIN ROUTE R
+            ON S.SCHEDULE_ID = R.SCHEDULE_SCHEDULE_ID
+
+        LEFT JOIN STATION DS
+            ON R.DEPARTURE_STATION_ID = DS.STATION_ID
+
+        LEFT JOIN STATION AST
+            ON R.ARRIVAL_STATION_ID = AST.STATION_ID
+
+        WHERE S.USER_USER_ID = #{userId}
+
+        ORDER BY
+            S.TRAVEL_DATE,
+            S.SCHEDULE_ID,
+            R.ROUTE_SEQ
+
     </select>
 
 </mapper>

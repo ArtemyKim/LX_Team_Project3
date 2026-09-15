@@ -22,10 +22,10 @@ public class SubwayScheduleDAO {
         );
     }
 
-    public List<ScheduleDTO> selectScedulesByUserId(int userId) {
+    public List<ScheduleDTO> selectSchedulesByUserId(int userId) {
 
         return sqlSession.selectList(
-            "lx.edu.subwayproject.dao.SubwayScheduleDAO.selectScedulesByUserId",
+            "lx.edu.subwayproject.dao.SubwayScheduleDAO.selectSchedulesByUserId",
             userId
         );
     }

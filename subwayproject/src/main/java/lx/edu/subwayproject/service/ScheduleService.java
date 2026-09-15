@@ -23,4 +23,10 @@ public class ScheduleService {
 
         }
     
+    // 특정 유저의 스케줄 목록 조회
+    public List<ScheduleDTO> selectSchedulesByUserId(int userId) {
+
+        return dao.selectSchedulesByUserId(userId);
+    }
+    
 }
