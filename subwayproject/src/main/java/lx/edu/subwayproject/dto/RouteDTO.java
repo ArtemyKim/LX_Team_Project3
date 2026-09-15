@@ -12,9 +12,6 @@ public class RouteDTO {
     private int departureStationId; // 출발역의 ID
     private int arrivalStationId; // 도착역의 ID
     
-    // ROUTE 테이블의 순서
-    private int routeSeq;
-    
     // 조회 화면 출력용
     private String departureStationName;
     private String arrivalStationName;

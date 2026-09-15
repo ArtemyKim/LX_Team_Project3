@@ -29,7 +29,6 @@ public class PageController {
     public String scheduleInputPage() {
         return "schedule_input"; // schedule_input.jsp로 이동
     }
-    
 
     
     // (테스트)스케쥴 추가
@@ -39,7 +38,7 @@ public class PageController {
     }
 
     // 사용자의 스케줄 확인 페이지
-    @GetMapping("/schedule/outputTest")
+    @GetMapping("/schedules.do")
     public String scheduleStatusPage(
             HttpSession session,
             Model model) {

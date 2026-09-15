@@ -2,21 +2,75 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lx.edu.subwayproject.dao.SubwayRouteDAO">
 	
-	<!-- 경로 저장 -->
-    <insert id="insertRoute" parameterType="lx.edu.subwayproject.dto.RouteDTO" 
-            useGeneratedKeys="true" keyProperty="routeId">
+    <!-- =========================
+         Route 저장
+         ========================= -->
+    <insert id="insertRoute"
+            parameterType="lx.edu.subwayproject.dto.RouteDTO"
+            useGeneratedKeys="true"
+            keyProperty="routeId">
+
         INSERT INTO ROUTE (
             ROUTE_SEQ,
             SCHEDULE_SCHEDULE_ID,
             DEPARTURE_STATION_ID,
             ARRIVAL_STATION_ID
-            
-        ) VALUES (
+        )
+        VALUES (
             #{routeSeq},
             #{scheduleId},
-            #{departureStationId}, 
+            #{departureStationId},
             #{arrivalStationId}
         )
+
     </insert>
+    
+        <!-- =========================
+         특정 Schedule의 Route 조회
+         ========================= -->
+    <select id="selectRoutesByScheduleId"
+            parameterType="int"
+            resultType="lx.edu.subwayproject.dto.RouteDTO">
+
+        SELECT
+
+            R.ROUTE_ID AS routeId,
+
+            R.ROUTE_SEQ AS routeSeq,
+
+            R.SCHEDULE_SCHEDULE_ID AS scheduleId,
+
+            R.DEPARTURE_STATION_ID AS departureStationId,
+
+            R.ARRIVAL_STATION_ID AS arrivalStationId,
+
+            DS.STATION_NAME AS departureStationName,
+
+            AST.STATION_NAME AS arrivalStationName
+
+
+        FROM ROUTE R
+
+
+        LEFT JOIN STATION DS
+
+            ON R.DEPARTURE_STATION_ID
+             = DS.STATION_ID
+
+
+        LEFT JOIN STATION AST
+
+            ON R.ARRIVAL_STATION_ID
+             = AST.STATION_ID
+
+
+        WHERE R.SCHEDULE_SCHEDULE_ID = #{scheduleId}
+
+
+        ORDER BY R.ROUTE_SEQ
+
+    </select>
+    
+    
     
 </mapper>
