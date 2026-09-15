@@ -35,4 +35,13 @@
 	</insert>
 	<!-- 이례상황 추가 끝 -->
 	
+	
+	<!-- 스케쥴에 저장된 날짜로 해당 날짜의 이례상황 불러오기 -->
+	<select id = "getNoticeListByDate">
+		select* from subway_notice
+		where reference_date = #{scheduleDate}
+	</select>
+	<!-- 스케쥴에 저장된 날짜로 해당 날짜의 이례상황 불러오기 -->
+	
+	
 </mapper>

@@ -20,6 +20,17 @@ public class SubwayNoticeService {
     @Autowired
     private SubwayNoticeDAO dao;
     
+    
+    
+    // 날짜를 기준으로 이례상황 목록 조회
+    public List<SubwayNoticeDTO> getNoticeListByDate(
+            String scheduleDate) {
+
+        return dao.getNoticeListByDate(scheduleDate);
+    }
+    
+    
+    
     // 전처리된 JSON데이터를 DB에 저장하는 코드.
     public void saveNotice(String json) throws Exception {
 

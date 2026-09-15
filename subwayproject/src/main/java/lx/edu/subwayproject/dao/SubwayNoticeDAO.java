@@ -1,5 +1,7 @@
 package lx.edu.subwayproject.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,13 @@ public class SubwayNoticeDAO {
         sqlSession.insert(
             "lx.edu.subwayproject.dao.SubwayNoticeDAO.insertNotice",
             dto
+        );
+    }
+    
+    public List<SubwayNoticeDTO> getNoticeListByDate(String scheduleDate) {
+        return sqlSession.selectList(
+            "lx.edu.subwayproject.dao.SubwayNoticeDAO.getNoticeListByDate",
+            scheduleDate
         );
     }
 }
