@@ -11,5 +11,10 @@ public class RouteDTO {
     private int scheduleId; // 해당 루트를 가지는 스케쥴의 ID
     private int departureStationId; // 출발역의 ID
     private int arrivalStationId; // 도착역의 ID
+    
+    // 조회 화면 출력용
+    private String departureStationName;
+    private String arrivalStationName;
+    
 
 }

@@ -17,4 +17,5 @@ public class ScheduleDTO {
     private LocalTime travelTime; // 시간(현재는 미사용)
 
     private List<RouteDTO> routes; //루트 내용
+    
 }

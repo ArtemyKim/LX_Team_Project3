@@ -29,7 +29,7 @@ public class LoginController {
 		
 		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
-			return "redirect:/schedule_status.do";
+			return "redirect:/schedules.do";
 		}
 		req.setAttribute("loginError", true);
 		return "login";
