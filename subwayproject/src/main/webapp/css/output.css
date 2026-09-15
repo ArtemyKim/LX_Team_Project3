@@ -1,0 +1,224 @@
+/* ===== 뒷배경 및 글자 ===== */
+body {
+    background-color: #ffffff;
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+    padding: 30px;
+}
+
+/* ===== 네비 ===== */
+.schedule-nav-wrap {
+    position: relative;
+    width: 500px;
+    margin: 0 auto 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.schedule-nav {
+    display: flex;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    list-style: none;
+    z-index: 2;
+}
+
+.schedule-nav-link {
+    color: #f9b653;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* ===== 새 경로 추가 버튼 ===== */
+.add-route-btn {
+    display: inline-block;
+    background-color: #5a5f66;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* ===== 지하철 뒷 배경 ===== */
+.subway-scene {
+    position: relative;
+    height: 90vh;
+    width: auto;
+    max-width: 100%;
+    aspect-ratio: 5692 / 3200;
+    margin: 10px auto 0;
+    background-image: url('../image/background2.png');
+    background-size: cover;
+    background-position: center;
+    container-type: inline-size;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 160px;
+}
+
+/* ===== 경로 카드 너비 ===== */
+.card-wrap {
+    width: 700px;
+}
+
+/* ===== 경로 카드 ===== */
+.route-card {
+    background-color: #bfe1ee;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.route-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.route-name {
+    color: #1c1d1f;
+    letter-spacing: 0.02em;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.route-meta {
+    font-size: 13px;
+    color: #3a3a3a;
+    margin: 4px 0 12px;
+}
+
+/* ===== 상태 뱃지 ===== */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.status-green  { background-color: #5abf5a; color: #ffffff; }
+
+.status-yellow {
+    background-color: #f9b653;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.status-yellow:hover {
+    background-color: #f4a935;
+}
+
+/* ===== 역 구간 ===== */
+.station-block {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #1c1d1f;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.station-block .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f4a935;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* ===== 이례상황 안내 ===== */
+.notice-text {
+    font-size: 13px;
+    color: #1c1d1f;
+    background-color: #f4a935;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* ===== 카드 액션 버튼 ===== */
+.card-actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit,
+.btn-delete {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid;
+}
+
+.btn-edit   { color: #2563eb; border-color: #2563eb; }
+.btn-delete { color: #dc2626; border-color: #dc2626; }
+
+/* ===== 빈 상태 ===== */
+.empty-msg {
+    color: #666;
+    background-color: #bfe1ee;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.nav-wrap {
+    position: relative;
+    width: 500px;
+    margin: 0 auto 200px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.nav-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-nav {
+    display: flex;
+    gap: 48px;
+    padding: 0;
+    margin: 0 0 18px;
+    background-color: transparent;
+    list-style: none;
+}
+
+.add-route-btn {
+    display: inline-block;
+    background-color: #5a5f66;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 16px;   /* 버튼 자체 크기/여백은 여기서 조정 */
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+    margin-top: 90px;     /* 세로 위치는 여기서 조정 */
+}

@@ -15,55 +15,8 @@
 
 <title>이례상황 상세</title>
 
-<style>
-
-    body {
-        font-family: sans-serif;
-        padding: 30px;
-    }
-
-    .schedule-info {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 30px;
-    }
-
-    .notice {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .notice-title {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    .notice-content {
-        margin-top: 15px;
-        padding: 15px;
-        background-color: #f5f5f5;
-        border-radius: 6px;
-    }
-
-    .back-button {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 18px;
-        border-radius: 6px;
-        text-decoration: none;
-        background-color: #333;
-        color: white;
-    }
-
-    .back-button:hover {
-        background-color: #555;
-    }
-
-</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/notice.css">
 
 </head>
 

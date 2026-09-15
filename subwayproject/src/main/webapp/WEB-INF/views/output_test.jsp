@@ -15,61 +15,20 @@
 
 <title>내 스케줄</title>
 
-<style>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
 
-    body {
-        font-family: sans-serif;
-        padding: 30px;
-    }
+<!-- ============ Google Fonts begin ============ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+	rel="stylesheet">
+<!-- ============ Google Fonts end ============ -->
 
-    .schedule {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    th,
-    td {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .status-area {
-        margin-top: 20px;
-    }
-
-    .status-badge {
-        display: inline-block;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    .problem {
-        background-color: #f8d7da;
-        color: #842029;
-        cursor: pointer;
-    }
-
-    .problem:hover {
-        background-color: #f1aeb5;
-    }
-
-    .safe {
-        background-color: #d1e7dd;
-        color: #0f5132;
-    }
-
-</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/output.css">
 
 </head>
 
@@ -77,158 +36,147 @@
 <body>
 
 
-<h1>내 스케줄</h1>
+<div class="schedule-nav-wrap">
+
+    <ul class="schedule-nav">
+        <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
+        <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/community">Community</a></li>
+    </ul>
+
+    <a class="add-route-btn"
+       href="${pageContext.request.contextPath}/schedule/form">
+        + 새 경로 추가하기
+    </a>
+
+</div>
 
 
-<!-- 등록된 Schedule이 없는 경우 -->
-<c:if test="${empty scheduleList}">
+<div class="subway-scene">
 
-    <p>
-        등록된 스케줄이 없습니다.
-    </p>
+    <div class="card-wrap">
 
-</c:if>
+        <!-- 등록된 Schedule이 없는 경우 -->
+        <c:if test="${empty scheduleList}">
 
-
-
-<!-- Schedule 목록 -->
-<c:forEach var="schedule"
-           items="${scheduleList}">
-
-
-    <div class="schedule">
-
-
-        <h2>
-            ${schedule.scheduleName}
-        </h2>
-
-
-        <p>
-            날짜 :
-            ${schedule.travelDate}
-        </p>
-
-
-        <c:if test="${not empty schedule.travelTime}">
-
-            <p>
-                시간 :
-                ${schedule.travelTime}
+            <p class="empty-msg">
+                등록된 스케줄이 없습니다.
             </p>
 
         </c:if>
 
 
+        <!-- Schedule 목록 -->
+        <c:forEach var="schedule"
+                   items="${scheduleList}">
 
-        <h3>이동 경로</h3>
+
+            <div class="route-card">
 
 
-        <!-- Route 존재 여부 -->
-        <c:choose>
+                <div class="route-card-header">
 
-            <c:when test="${empty schedule.routes}">
+                    <h2 class="route-name">
+                        ${schedule.scheduleName}
+                    </h2>
 
-                <p>
-                    등록된 경로가 없습니다.
+
+                    <c:choose>
+
+                        <c:when test="${schedule.problem}">
+
+                            <a class="status-badge status-yellow"
+                               href="${pageContext.request.contextPath}/schedule/status/${schedule.scheduleId}/notices">
+
+                                문제 있음
+
+                            </a>
+
+                        </c:when>
+
+
+                        <c:otherwise>
+
+                            <span class="status-badge status-green">
+
+                                정상
+
+                            </span>
+
+                        </c:otherwise>
+
+                    </c:choose>
+
+                </div>
+
+
+                <p class="route-meta">
+                    ${schedule.travelDate}
+
+                    <c:if test="${not empty schedule.travelTime}">
+                        · ${schedule.travelTime}
+                    </c:if>
                 </p>
 
-            </c:when>
 
 
-            <c:otherwise>
+                <!-- Route 존재 여부 -->
+                <c:choose>
 
-                <table>
+                    <c:when test="${empty schedule.routes}">
 
-                    <thead>
+                        <p>
+                            등록된 경로가 없습니다.
+                        </p>
 
-                        <tr>
-
-                            <th>순서</th>
-
-                            <th>출발역</th>
-
-                            <th>도착역</th>
-
-                        </tr>
-
-                    </thead>
+                    </c:when>
 
 
-                    <tbody>
+                    <c:otherwise>
 
                         <c:forEach var="route"
                                    items="${schedule.routes}">
 
-                            <tr>
-
-                                <td>
-                                    ${route.routeSeq}
-                                </td>
-
-                                <td>
+                            <div class="station-block">
+                                <span class="dot"></span>
+                                <span>
                                     ${route.departureStationName}
-                                </td>
-
-                                <td>
+                                    →
                                     ${route.arrivalStationName}
-                                </td>
-
-                            </tr>
+                                </span>
+                            </div>
 
                         </c:forEach>
 
-                    </tbody>
+                    </c:otherwise>
 
-                </table>
-
-            </c:otherwise>
-
-        </c:choose>
+                </c:choose>
 
 
 
-        <div class="status-area">
+                <!-- 문제 있을 때 안내 문구 -->
+                <c:if test="${schedule.problem}">
 
-            <strong>
-                이례상황 :
-            </strong>
+                    <p class="notice-text">
+                        이례상황이 등록되어 있습니다. 클릭하여 확인하세요.
+                    </p>
 
-
-            <!-- 문제 여부 표시 -->
-            <c:choose>
-
-                <c:when test="${schedule.problem}">
-
-                    <a class="status-badge problem"
-                       href="${pageContext.request.contextPath}/schedule/status/${schedule.scheduleId}/notices">
-
-                        문제 있음
-
-                    </a>
-
-                </c:when>
+                </c:if>
 
 
-                <c:otherwise>
 
-                    <span class="status-badge safe">
+                <div class="card-actions">
+                    <a class="btn-delete" href="#">삭제</a>
+                </div>
 
-                        문제 없음
 
-                    </span>
+            </div>
 
-                </c:otherwise>
 
-            </c:choose>
-
-        </div>
-
+        </c:forEach>
 
     </div>
 
-
-</c:forEach>
+</div>
 
 
 </body>
