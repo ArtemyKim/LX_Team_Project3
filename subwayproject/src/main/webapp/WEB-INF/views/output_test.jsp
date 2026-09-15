@@ -226,6 +226,28 @@
 		    </c:otherwise>
 		
 		</c:choose>
+		
+		<h3>이례상황 판정</h3>
+
+		<c:choose>
+		
+		    <c:when test="${schedule.problem}">
+		
+		        <strong>
+		            문제 있음
+		        </strong>
+		
+		    </c:when>
+		
+		    <c:otherwise>
+		
+		        <strong>
+		            문제 없음
+		        </strong>
+		
+		    </c:otherwise>
+		
+		</c:choose>
 
 
     </div>

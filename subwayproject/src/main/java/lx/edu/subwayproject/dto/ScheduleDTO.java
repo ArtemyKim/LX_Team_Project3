@@ -23,6 +23,9 @@ public class ScheduleDTO {
     private List<RouteDTO> routes;
     // 해당 날짜에 발생한 이례상황 목록
     private List<SubwayNoticeDTO> notices;
+
+    // 이례상황 영향 여부
+    private boolean problem;
     
     
     

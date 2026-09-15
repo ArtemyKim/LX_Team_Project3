@@ -36,6 +36,7 @@
 			line_order_id
 		from station
 		where line_name = #{lineName}
+		order by line_order_id asc
 	</select>
 	
 	
