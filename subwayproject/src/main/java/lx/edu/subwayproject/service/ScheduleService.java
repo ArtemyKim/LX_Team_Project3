@@ -132,11 +132,12 @@ public class ScheduleService {
                 // 특정 역
                 else {
 
-                    List<String> stationCodes =
-                            Arrays.stream(
-                                    sectionCodes.split("\\s*,\\s*")
-                            )
-                            .toList();
+                	List<String> stationCodes =
+                	        Arrays.stream(
+                	                sectionCodes.split("\\s*,\\s*")
+                	        )
+                	        .map(code -> code.replaceFirst("^0+(?!$)", ""))
+                	        .toList();
 
 
                     List<StationDTO> affectedStations =
@@ -147,6 +148,7 @@ public class ScheduleService {
                     List<String> affectedStationNames =
                             affectedStations.stream()
                                     .map(StationDTO::getStationName)
+                                    .distinct()
                                     .toList();
 
                     notice.setAffectedStationNames(
@@ -217,10 +219,16 @@ public class ScheduleService {
                 start / 1000;
 
 
+        // 디버그용
+        int noticeNumber = 10;
+        
         for (StationDTO station : affectedStations) {
+        	
+        	System.out.println("루프문 탐색!" + station);
 
             int noticeOrder =
                     station.getLineOrderId();
+            noticeNumber = noticeOrder;
 
 
             // LINE_ORDER_ID가 없는 데이터 방지
@@ -246,6 +254,9 @@ public class ScheduleService {
                 return true;
             }
         }
+        
+        //디버그용 
+        System.out.println("끼끼끼 : " + min + "이랑" + max + "문제되는곳은 : " + noticeNumber);
 
 
         return false;

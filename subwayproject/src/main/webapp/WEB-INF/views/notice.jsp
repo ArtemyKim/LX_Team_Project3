@@ -23,6 +23,7 @@
 
 <body>
 
+<div class="detail-wrap">
 
 <h1>이례상황 상세</h1>
 
@@ -84,49 +85,7 @@
                 </div>
 
 
-				<p>
-				
-				    <strong>이례상황 종류 :</strong>
-				
-				    <c:choose>
-				
-				        <c:when test="${notice.noticeTypeCode == 1}">
-				            화재
-				        </c:when>
-				
-				        <c:when test="${notice.noticeTypeCode == 2}">
-				            차량고장
-				        </c:when>
-				
-				        <c:when test="${notice.noticeTypeCode == 3}">
-				            열차사고
-				        </c:when>
-				
-				        <c:when test="${notice.noticeTypeCode == 4}">
-				            시설장애
-				        </c:when>
-				
-				        <c:when test="${notice.noticeTypeCode == 5}">
-				            단순지연
-				        </c:when>
-				
-				        <c:when test="${notice.noticeTypeCode == 6}">
-				            기타사유
-				        </c:when>
-				
-				        <c:otherwise>
-				            기타사유
-				        </c:otherwise>
-				
-				    </c:choose>
-				
-				</p>
 
-
-                <p>
-                    <strong>이례상황 종류 :</strong>
-                    ${notice.noticeTypeCode}
-                </p>
 
 
                 <p>
@@ -219,6 +178,7 @@
 
 </a>
 
+</div>
 
 </body>
 

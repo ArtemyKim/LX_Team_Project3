@@ -2,10 +2,11 @@
     pageEncoding="UTF-8" errorPage="addrbook_error.jsp" import="lx.edu.subwayproject.*"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 <%@ page session="false"%>
-<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/schedulerForm.css">
 
 <!DOCTYPE html>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/schedulerForm.css">
 <html>
 
 <head>
@@ -43,7 +44,7 @@
 		            '<h3>Route ' + (index + 1) + '</h3>' +
 	
 		            '<button type="button" ' +
-		                    'class="btn-delete-route" ' +
+		                    'class="btn btn-danger btn-sm btn-delete-route" ' +
 		                    'onclick="deleteRoute(this)">' +
 		                '경로 삭제' +
 		            '</button>' +
@@ -377,7 +378,7 @@
 				        <h3>Route 1</h3>
 				
 				        <button type="button"
-				                class="btn-delete-route"
+				                class="btn btn-danger btn-sm btn-delete-route"
 				                onclick="deleteRoute(this)">
 				            경로 삭제
 				        </button>

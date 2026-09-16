@@ -26,7 +26,7 @@
 
 	<div class="write-wrap">
 		<div class="write-card">
-			<h2>새로운 이례상황 알리기</h2>
+			<h2>새 글 작성</h2>
 
 			<form action="${pageContext.request.contextPath}/community/write" method="post">
 				<div class="write-field">
