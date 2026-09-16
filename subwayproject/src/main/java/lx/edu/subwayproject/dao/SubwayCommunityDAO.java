@@ -30,18 +30,28 @@ public class SubwayCommunityDAO {
     }
 
     // 게시글 수정
-    public void updateCommunityPost(CommunityPostDTO dto) {
-        sqlSession.update(
+    public int updateCommunityPost(CommunityPostDTO dto) {
+        return sqlSession.update(
             "lx.edu.subwayproject.dao.CommunityPostDAO.updatePost",
             dto
         );
     }
 
-    // 게시글 삭제
-    public void deleteCommunityPost(CommunityPostDTO dto) {
-        sqlSession.delete(
+    public int deleteCommunityPost(CommunityPostDTO dto) {
+        return sqlSession.delete(
             "lx.edu.subwayproject.dao.CommunityPostDAO.deletePost",
             dto
         );
     }
+    
+    // 게시글 좋아요 (카운트 1 증가)
+    public int likeCommunityPost(int postId) {
+        return sqlSession.update(
+            "lx.edu.subwayproject.dao.CommunityPostDAO.likePost",
+            postId
+        );
+    }
+    
+    
+    
 }

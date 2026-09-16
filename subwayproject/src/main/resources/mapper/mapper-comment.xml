@@ -13,7 +13,8 @@
 			USER_NAME AS userName, 
 			USER_USER_ID AS userId 
 			FROM COMMUNITY_COMMENT 
-			WHERE POST_ID = #{postId} 
+			WHERE POST_ID = #{postId}
+			 
 </select>
 <!--  댓글 입력하기  -->
 
@@ -35,7 +36,7 @@
 		COMMUNITY_COMMENT 
 		SET CONTENT = #{content} 
 		WHERE COMMENT_ID = #{commentId} 
-		AND USER_USER_ID = #{userId} 
+		AND USER_USER_ID = #{userId}
 		
 		</update>
 		

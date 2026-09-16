@@ -25,12 +25,22 @@
 <body>
 
     <!-- ============ Navi begin ============ href 바꿔야함 -->
-    <ul class="nav">
+ <ul class="nav">
+        <c:choose>
+            <c:when test="${sessionScope.loginUser != null}">
+                <li class="nav-item">
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/logout.do">Logout</a>
+                </li>
+            </c:when>
+            
+            <c:otherwise>
+                <li class="nav-item">
+                    <a class="nav-link active" href="${pageContext.request.contextPath}/login.do">Login</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
         <li class="nav-item">
-            <a class="nav-link active" href="login.jsp">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Community</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/community">Community</a>
         </li>
     </ul>
     <!-- ============ Navi end ============ -->

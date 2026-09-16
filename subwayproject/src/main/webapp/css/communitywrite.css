@@ -1,0 +1,128 @@
+/* ===== 뒷배경 및 글자 (community.css와 톤 통일) ===== */
+body {
+	background-color: #f4f9fb;
+	font-family: 'Pretendard', sans-serif;
+	color: #1c1d1f;
+	margin: 0;
+}
+
+/* ===== 네비 (community.jsp와 동일한 톤) ===== */
+.nav {
+	position: absolute;
+	top: 30px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	width: 700px;
+	display: flex;
+	justify-content: flex-start;
+	gap: 16px;
+	padding: 0;
+	background-color: transparent;
+	list-style: none;
+	z-index: 2;
+}
+
+.nav-link {
+	color: #f9b653;
+	font-family: 'Pretendard', sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+/* ===== 글쓰기 카드 ===== */
+.write-wrap {
+	max-width: 600px;
+	margin: 120px auto 60px;
+	padding: 0 16px;
+}
+
+.write-card {
+	background-color: #bfe1ee;
+	border-radius: 16px;
+	padding: 32px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.write-card h2 {
+	margin: 0 0 24px;
+	font-size: 22px;
+	font-weight: 700;
+	color: #1c1d1f;
+}
+
+.write-card label {
+	display: block;
+	font-weight: 700;
+	font-size: 14px;
+	margin-bottom: 8px;
+	color: #1c1d1f;
+}
+
+.write-field {
+	margin-bottom: 20px;
+}
+
+/* ===== 입력창 (아코디언 바디처럼 흰 배경) ===== */
+.write-card input[type="text"],
+.write-card textarea {
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #ffffff;
+	border: 1px solid #a9cddb;
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-family: 'Pretendard', sans-serif;
+	font-size: 15px;
+	color: #1c1d1f;
+}
+
+.write-card textarea {
+	resize: vertical;
+	min-height: 160px;
+}
+
+.write-card input[type="text"]:focus,
+.write-card textarea:focus {
+	outline: none;
+	border-color: #f9b653;
+}
+
+/* ===== 버튼 ===== */
+.write-actions {
+	display: flex;
+	gap: 10px;
+	margin-top: 24px;
+}
+
+.btn-submit {
+	background-color: #f9b653;
+	border: 1px solid #f9b653;
+	color: #ffffff;
+	font-weight: 700;
+	padding: 10px 24px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.btn-submit:hover {
+	background-color: #f4a935;
+	border-color: #f4a935;
+}
+
+.btn-cancel {
+	background-color: #ffffff;
+	border: 1px solid #5abf5a;
+	color: #1c1d1f;
+	font-weight: 700;
+	padding: 10px 24px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.btn-cancel:hover {
+	background-color: #5abf5a;
+	border-color: #5abf5a;
+	color: #ffffff;
+}

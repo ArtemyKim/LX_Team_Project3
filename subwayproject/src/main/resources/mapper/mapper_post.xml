@@ -10,7 +10,9 @@
 		USER_NAME AS userName, 
 		USER_USER_ID AS userId, 
 		CREATED_TIME AS createdTime, 
-		LIKE_COUNT AS likeCount FROM COMMUNITY_POST ORDER BY CREATED_TIME DESC 
+		LIKE_COUNT AS likeCount 
+		FROM COMMUNITY_POST 
+		ORDER BY CREATED_TIME DESC 
 </select>
 
 
@@ -30,7 +32,8 @@
 		UPDATE COMMUNITY_POST SET TITLE = #{title}, 
 		CONTENT = #{content} 
 		WHERE POST_ID = #{postId}
-		AND USER_USER_ID = #{userId} 
+		AND USER_USER_ID = #{userId}
+		 
 </update>
 
 
@@ -38,6 +41,15 @@
 <delete id="deletePost" parameterType="lx.edu.subwayproject.dto.CommunityPostDTO"> 
 			DELETE FROM COMMUNITY_POST 
 			WHERE POST_ID = #{postId} 
-			AND USER_USER_ID = #{userId} 
+			AND USER_USER_ID = #{userId}
+			
 </delete>
+
+
+<!--  좋아요 (카운트 1 증가)  -->
+<update id="likePost" parameterType="int">
+		UPDATE COMMUNITY_POST 
+		SET LIKE_COUNT = LIKE_COUNT + 1 
+		WHERE POST_ID = #{postId}
+</update>
 </mapper>
