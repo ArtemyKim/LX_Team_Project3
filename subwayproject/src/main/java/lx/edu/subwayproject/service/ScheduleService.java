@@ -143,6 +143,15 @@ public class ScheduleService {
                             stationService.selectStationsByCodes(
                                     stationCodes
                             );
+                    
+                    List<String> affectedStationNames =
+                            affectedStations.stream()
+                                    .map(StationDTO::getStationName)
+                                    .toList();
+
+                    notice.setAffectedStationNames(
+                            affectedStationNames
+                    );
 
 
                     for (RouteDTO route : routes) {

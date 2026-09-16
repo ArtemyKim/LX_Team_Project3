@@ -1,6 +1,7 @@
 package lx.edu.subwayproject.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 
@@ -28,5 +29,9 @@ public class SubwayNoticeDTO {
     private LocalDateTime abnormalEndTime; // 이례상황 종료시각
 
     private String nonstopYn; // 무정차 여부
-
+    
+    // 이 아래도 DB에는 저장되지 않어요
+    
+    private List<String> affectedStationNames; // 이례상황 발생한 역 이름 저장용
+ 
 }
