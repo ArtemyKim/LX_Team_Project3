@@ -39,7 +39,7 @@
 <div class="schedule-nav-wrap">
 
     <ul class="schedule-nav">
-        <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
+        <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/login">Logout</a></li>
         <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/community">Community</a></li>
     </ul>
 

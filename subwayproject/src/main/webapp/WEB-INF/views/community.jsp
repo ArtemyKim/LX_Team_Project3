@@ -50,7 +50,7 @@
 
 				<h2 class="accordion-header" id="heading-${post.postId}">
 					<button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${post.postId}">
-						<span class="badge bg-primary me-3">Q</span> 
+						<span class="badge bg-primary me-3">제목</span> 
 						<span class="fw-bold fs-5 me-auto">${post.title}</span> 
 						<span class="text-muted small fw-normal me-3 d-none d-md-block">작성자: ${post.userName} | ${post.createdTime}</span>
 					</button>
@@ -153,8 +153,9 @@
     }
 
     // 💬 3. 댓글 등록 (새로고침 없이 비동기 등록)
+   // 💬 3. 댓글 등록 (수정된 코드)
     function submitComment(event, postId) {
-        event.preventDefault(); // 화면 깜빡임/새로고침 원천 차단!
+        event.preventDefault(); 
         
         let form = event.target;
         let contentInput = form.querySelector('input[name="content"]');
@@ -171,7 +172,10 @@
         })
         .then(response => {
             if(response.ok) {
-                location.reload(); // 댓글 등록 성공 시 부드럽게 목록 갱신
+                // 🌟 포인트: 새로고침 직전에 열려있던 postId를 세션 스토리지에 백업합니다.
+                sessionStorage.setItem("openPostId", postId);
+                
+                location.reload(); // 기존처럼 새로고침 진행
             } else {
                 alert("댓글 등록 실패");
             }
@@ -292,6 +296,24 @@
         .catch(error => console.error('Error:', error))
         .finally(() => { btnElement.disabled = false; });
     }
+    
+ // 🌟 페이지가 완전히 로드된 후 실행 (새로고침 직후 아코디언 복구)
+    document.addEventListener("DOMContentLoaded", function() {
+        let openPostId = sessionStorage.getItem("openPostId");
+        
+        if (openPostId) {
+            let targetCollapse = document.getElementById('collapse-' + openPostId);
+            if (targetCollapse) {
+                // 부트스트랩 API를 사용해 해당 아코디언을 강제로 엽니다.
+                let bsCollapse = new bootstrap.Collapse(targetCollapse, {
+                    toggle: false
+                });
+                bsCollapse.show();
+            }
+            // 목적을 달성했으므로 스토리지에서 삭제합니다.
+            sessionStorage.removeItem("openPostId"); 
+        }
+    });
 	</script>
 </body>
 </html>

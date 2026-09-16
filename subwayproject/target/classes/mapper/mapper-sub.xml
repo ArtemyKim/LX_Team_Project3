@@ -78,5 +78,9 @@
 	</select>
 	<!-- 끝 :: 스케쥴에 저장된 날짜로 해당 날짜의 이례상황 불러오기 -->
 	
+	<delete id="truncateNoticeList">
+		TRUNCATE TABLE SUBWAY_NOTICE
+	</delete>
+	
 	
 </mapper>

@@ -34,4 +34,11 @@ public class SubwayNoticeDAO {
             scheduleDate
         );
     }
+    
+    public void truncateNoticeList() {
+    	
+    	sqlSession.delete(
+    			"lx.edu.subwayproject.dao.SubwayNoticeDAO.truncateNoticeList"
+            );
+    }
 }
