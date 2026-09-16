@@ -29,4 +29,10 @@ public class SubwayScheduleDAO {
             userId
         );
     }
+    
+    public void deleteSchedule(int scheduleId) {
+    	sqlSession.delete("lx.edu.subwayproject.dao.SubwayScheduleDAO.deleteSchedule", scheduleId);
+    }
+    
+    
 }

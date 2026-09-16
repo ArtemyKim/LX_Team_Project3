@@ -271,4 +271,14 @@ public class ScheduleService {
 
         return lineNameList.contains(routeLineName);
     }
+    
+    //스케쥴 삭제
+    public void deleteSchedule(int scheduleId) {
+    	dao.deleteSchedule(scheduleId);
+    	
+    }
+    
+    
+    
+    
 }

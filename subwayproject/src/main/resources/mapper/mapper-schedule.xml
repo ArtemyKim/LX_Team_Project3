@@ -97,7 +97,14 @@
         ORDER BY
             TRAVEL_DATE,
             SCHEDULE_ID
-
     </select>
+
+	<!--스케쥴 삭제 -->
+	<delete id="deleteSchedule">
+		delete from schedule
+		where schedule_id = #{scheduleId}
+	</delete>
+
+
 
 </mapper>
