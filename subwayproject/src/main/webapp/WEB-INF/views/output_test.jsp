@@ -39,12 +39,12 @@
 <div class="schedule-nav-wrap">
 
     <ul class="schedule-nav">
-        <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/login">Login</a></li>
+        <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/login">Logout</a></li>
         <li><a class="schedule-nav-link" href="${pageContext.request.contextPath}/community">Community</a></li>
     </ul>
 
     <a class="add-route-btn"
-       href="${pageContext.request.contextPath}/schedule/form">
+       href="${pageContext.request.contextPath}/schedule/inputTest">
         + 새 경로 추가하기
     </a>
 
@@ -163,11 +163,23 @@
                 </c:if>
 
 
+				<!-- 스케쥴 삭제 -->
+               <div class="card-actions">
 
-                <div class="card-actions">
-                    <a class="btn-delete" href="#">삭제</a>
-                </div>
+			    <form action="${pageContext.request.contextPath}/schedules/delete"
+			          method="post">
+			
+			        <input type="hidden"
+			               name="scheduleId"
+			               value="${schedule.scheduleId}">
+			
+			        <button type="submit" class="btn-delete">
+			            삭제
+			        </button>
 
+				    </form>
+				
+				</div>
 
             </div>
 

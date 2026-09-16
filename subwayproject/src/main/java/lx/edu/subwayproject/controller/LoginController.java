@@ -34,4 +34,11 @@ public class LoginController {
 		req.setAttribute("loginError", true);
 		return "login";
 	}	
+	
+	// 로그아웃 처리 (기존 login 로직은 손대지 않고 메서드만 추가)
+		@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+		public String logout(HttpSession session) {
+			session.invalidate();
+			return "redirect:/community";
+		}
 }

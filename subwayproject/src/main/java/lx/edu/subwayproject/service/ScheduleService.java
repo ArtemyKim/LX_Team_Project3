@@ -143,6 +143,15 @@ public class ScheduleService {
                             stationService.selectStationsByCodes(
                                     stationCodes
                             );
+                    
+                    List<String> affectedStationNames =
+                            affectedStations.stream()
+                                    .map(StationDTO::getStationName)
+                                    .toList();
+
+                    notice.setAffectedStationNames(
+                            affectedStationNames
+                    );
 
 
                     for (RouteDTO route : routes) {
@@ -271,4 +280,14 @@ public class ScheduleService {
 
         return lineNameList.contains(routeLineName);
     }
+    
+    //스케쥴 삭제
+    public void deleteSchedule(int scheduleId) {
+    	dao.deleteSchedule(scheduleId);
+    	
+    }
+    
+    
+    
+    
 }

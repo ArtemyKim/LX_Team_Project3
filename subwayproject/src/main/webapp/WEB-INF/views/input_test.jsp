@@ -15,88 +15,176 @@
 
 <script>
 
-    // 현재까지 만들어진 Route 번호
+    // 현재까지 만들어진 Route 개수
     let routeCount = 1;
 
-    // contextPath
+    // contextPath 경로용
     const contextPath = "${pageContext.request.contextPath}";
 
 
     /*
  * 루트 추가
  */
-function addRoute() {
+	 function addRoute() {
+	
+		    const routeContainer =
+		        document.getElementById("routeContainer");
+	
+		    const routeDiv =
+		        document.createElement("div");
+	
+		    routeDiv.className = "route-item";
+	
+		    const index = routeCount;
+	
+		    routeDiv.innerHTML =
+	
+		        '<div class="route-title-row">' +
+		            '<h3>Route ' + (index + 1) + '</h3>' +
+	
+		            '<button type="button" ' +
+		                    'class="btn-delete-route" ' +
+		                    'onclick="deleteRoute(this)">' +
+		                '경로 삭제' +
+		            '</button>' +
+		        '</div>' +
+	
+		        '<div class="form-row">' +
+		            '<label>호선</label>' +
+		            '<select ' +
+		                'name="routes[' + index + '].lineName" ' +
+		                'class="line-select" ' +
+		                'data-index="' + index + '" ' +
+		                'required>' +
+	
+		                '<option value="">호선을 선택하세요</option>' +
+		                '<option value="1호선">1호선</option>' +
+		                '<option value="2호선">2호선</option>' +
+		                '<option value="3호선">3호선</option>' +
+		                '<option value="4호선">4호선</option>' +
+		                '<option value="5호선">5호선</option>' +
+		                '<option value="6호선">6호선</option>' +
+		                '<option value="7호선">7호선</option>' +
+		                '<option value="8호선">8호선</option>' +
+		                '<option value="9호선">9호선</option>' +
+	
+		            '</select>' +
+		        '</div>' +
+	
+		        '<div class="form-row">' +
+		            '<label>출발역</label>' +
+		            '<select ' +
+		                'name="routes[' + index + '].departureStationId" ' +
+		                'id="departureStation-' + index + '" ' +
+		                'required disabled>' +
+	
+		                '<option value="">호선을 먼저 선택하세요</option>' +
+	
+		            '</select>' +
+		        '</div>' +
+	
+		        '<div class="form-row">' +
+		            '<label>도착역</label>' +
+		            '<select ' +
+		                'name="routes[' + index + '].arrivalStationId" ' +
+		                'id="arrivalStation-' + index + '" ' +
+		                'required disabled>' +
+	
+		                '<option value="">호선을 먼저 선택하세요</option>' +
+	
+		            '</select>' +
+		        '</div>';
+	
+		    routeContainer.appendChild(routeDiv);
+	
+		    routeCount++;
+		}
+    
+	 /*
+	  * 루트 삭제
+	  */
+	 function deleteRoute(button) {
 
-    const routeContainer =
-        document.getElementById("routeContainer");
+	     const routeContainer =
+	         document.getElementById("routeContainer");
 
-    const routeDiv =
-        document.createElement("div");
+	     const routeItems =
+	         routeContainer.querySelectorAll(".route-item");
 
-    routeDiv.className = "route-item";
+	     // 최소 1개의 경로는 유지
+	     if (routeItems.length <= 1) {
+	         alert("경로는 최소 1개 이상 있어야 합니다.");
+	         return;
+	     }
 
-    const index = routeCount;
+	     // 누른 버튼이 들어있는 route-item 삭제
+	     const routeItem =
+	         button.closest(".route-item");
 
-    routeDiv.innerHTML =
+	     routeItem.remove();
 
-        '<h3>Route ' + (index + 1) + '</h3>' +
+	     // 삭제 후 인덱스 다시 정리
+	     reindexRoutes();
+	 }
+	 
+	 
+	 // 지금 스케쥴에 Route들을 리스트로 넣고 있기 때문에 중간에 하나 삭제해버리면 인덱스 오류남
+	 // 그래서 Route 삭제 후에도 routes[0], routes[1], routes[2]..처럼 유지할 수 있게 reindex기능
+	 function reindexRoutes() {
 
-        '<div class="form-row">' +
-            '<label>호선</label>' +
+	     const routeItems =
+	         document.querySelectorAll("#routeContainer .route-item");
 
-            '<select ' +
-                'name="routes[' + index + '].lineName" ' +
-                'class="line-select" ' +
-                'data-index="' + index + '" ' +
-                'required>' +
+	     routeItems.forEach(function(routeItem, index) {
 
-                '<option value="">호선을 선택하세요</option>' +
-                '<option value="1호선">1호선</option>' +
-                '<option value="2호선">2호선</option>' +
-                '<option value="3호선">3호선</option>' +
-                '<option value="4호선">4호선</option>' +
-                '<option value="5호선">5호선</option>' +
-                '<option value="6호선">6호선</option>' +
-                '<option value="7호선">7호선</option>' +
-                '<option value="8호선">8호선</option>' +
-                '<option value="9호선">9호선</option>' +
+	         // Route 제목 수정
+	         const title =
+	             routeItem.querySelector("h3");
 
-            '</select>' +
-        '</div>' +
-
-
-        '<div class="form-row">' +
-            '<label>출발역</label>' +
-
-            '<select ' +
-                'name="routes[' + index + '].departureStationId" ' +
-                'id="departureStation-' + index + '" ' +
-                'required disabled>' +
-
-                '<option value="">호선을 먼저 선택하세요</option>' +
-
-            '</select>' +
-        '</div>' +
+	         title.textContent =
+	             "Route " + (index + 1);
 
 
-        '<div class="form-row">' +
-            '<label>도착역</label>' +
+	         // 호선 select 수정
+	         const lineSelect =
+	             routeItem.querySelector(".line-select");
 
-            '<select ' +
-                'name="routes[' + index + '].arrivalStationId" ' +
-                'id="arrivalStation-' + index + '" ' +
-                'required disabled>' +
+	         lineSelect.name =
+	             "routes[" + index + "].lineName";
 
-                '<option value="">호선을 먼저 선택하세요</option>' +
-
-            '</select>' +
-        '</div>';
+	         lineSelect.dataset.index =
+	             index;
 
 
-    routeContainer.appendChild(routeDiv);
+	         // 출발역 select 수정
+	         const departureSelect =
+	             routeItem.querySelector(
+	                 'select[name*="departureStationId"]'
+	             );
 
-    routeCount++;
-}
+	         departureSelect.name =
+	             "routes[" + index + "].departureStationId";
+
+	         departureSelect.id =
+	             "departureStation-" + index;
+
+
+	         // 도착역 select 수정
+	         const arrivalSelect =
+	             routeItem.querySelector(
+	                 'select[name*="arrivalStationId"]'
+	             );
+
+	         arrivalSelect.name =
+	             "routes[" + index + "].arrivalStationId";
+
+	         arrivalSelect.id =
+	             "arrivalStation-" + index;
+	     });
+
+	     // 현재 Route 개수로 맞춤
+	     routeCount = routeItems.length;
+	 }
 
 
     /*
@@ -281,12 +369,22 @@ function addRoute() {
                 </div>
 
                 <div id="routeContainer">
-
-                    <div class="route-item">
-
-                        <h3>Route 1</h3>
-
-                        <div class="form-row">
+				
+				<div class="route-item">
+				
+				    <div class="route-title-row">
+				
+				        <h3>Route 1</h3>
+				
+				        <button type="button"
+				                class="btn-delete-route"
+				                onclick="deleteRoute(this)">
+				            경로 삭제
+				        </button>
+				
+				    </div>
+				
+				    <div class="form-row">
                             <label>호선</label>
 
                             <select

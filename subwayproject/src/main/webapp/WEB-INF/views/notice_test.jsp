@@ -84,10 +84,43 @@
                 </div>
 
 
-                <p>
-                    <strong>Notice 번호 :</strong>
-                    ${notice.noticeId}
-                </p>
+				<p>
+				
+				    <strong>이례상황 종류 :</strong>
+				
+				    <c:choose>
+				
+				        <c:when test="${notice.noticeTypeCode == 1}">
+				            화재
+				        </c:when>
+				
+				        <c:when test="${notice.noticeTypeCode == 2}">
+				            차량고장
+				        </c:when>
+				
+				        <c:when test="${notice.noticeTypeCode == 3}">
+				            열차사고
+				        </c:when>
+				
+				        <c:when test="${notice.noticeTypeCode == 4}">
+				            시설장애
+				        </c:when>
+				
+				        <c:when test="${notice.noticeTypeCode == 5}">
+				            단순지연
+				        </c:when>
+				
+				        <c:when test="${notice.noticeTypeCode == 6}">
+				            기타사유
+				        </c:when>
+				
+				        <c:otherwise>
+				            기타사유
+				        </c:otherwise>
+				
+				    </c:choose>
+				
+				</p>
 
 
                 <p>
@@ -103,8 +136,35 @@
 
 
                 <p>
-                    <strong>영향 구간 :</strong>
-                    ${notice.stationSectionCodeList}
+					 <strong>영향 구간 :</strong>
+					
+					    <c:choose>
+					
+					        <c:when test="${notice.stationSectionCodeList eq '전구간'}">
+					
+					            전구간
+					
+					        </c:when>
+					
+					        <c:when test="${empty notice.stationSectionCodeList}">
+					
+					            구간 정보 없음
+					
+					        </c:when>
+					
+					        <c:otherwise>
+					
+					            <c:forEach var="stationName"
+					                       items="${notice.affectedStationNames}"
+					                       varStatus="status">
+					
+					                ${stationName}<c:if test="${not status.last}"> , </c:if>
+					
+					            </c:forEach>
+					
+					        </c:otherwise>
+					
+					    </c:choose>
                 </p>
 
 

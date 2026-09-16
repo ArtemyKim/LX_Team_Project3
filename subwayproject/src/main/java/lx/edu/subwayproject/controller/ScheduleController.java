@@ -1,13 +1,16 @@
 package lx.edu.subwayproject.controller;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,8 +33,8 @@ public class ScheduleController {
 
     @PostMapping // 추가하는 기능이므로 Post방식
     public void insertSchedule(
-        @ModelAttribute ScheduleDTO dto, HttpSession session ,HttpServletResponse response) throws Exception {
-    	
+        @ModelAttribute ScheduleDTO dto, HttpSession session ,HttpServletResponse res) throws Exception {
+   	
     	UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
     	dto.setUserId(loginUser.getUserId());
     	
@@ -40,9 +43,22 @@ public class ScheduleController {
         service.insertSchedule(dto);
         
 
-        response.sendRedirect(
+        res.sendRedirect(
             "/subwayproject/schedules.do"
         );
     }
+        
+        @PostMapping("/delete")
+        public void deleteSchedule(@RequestParam("scheduleId") int scheduleId, HttpServletResponse res) throws IOException {
+        	service.deleteSchedule(scheduleId);
+        	
+        	res.sendRedirect(
+                    "/subwayproject/schedules.do"
+                );
+        }
+     
+        
+        
+    
     
 }

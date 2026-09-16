@@ -30,17 +30,17 @@ public class SubwayCommunityCommentDAO {
         );
     }
 
-    // 댓글 수정
-    public void updateCommunityComment(CommunityCommentDTO dto) {
-        sqlSession.update(
+    // 댓글 수정 (영향받은 행 수 리턴)
+    public int updateCommunityComment(CommunityCommentDTO dto) {
+        return sqlSession.update(
             "lx.edu.subwayproject.dao.CommunityCommentDAO.updateComment",
             dto
         );
     }
 
-    // 댓글 삭제
-    public void deleteCommunityComment(CommunityCommentDTO dto) {
-        sqlSession.delete(
+    // 댓글 삭제 (영향받은 행 수 리턴)
+    public int deleteCommunityComment(CommunityCommentDTO dto) {
+        return sqlSession.delete(
             "lx.edu.subwayproject.dao.CommunityCommentDAO.deleteComment",
             dto
         );
